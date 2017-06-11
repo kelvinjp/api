@@ -48,7 +48,7 @@ app.use('/',usuarios);
 
 app.get('/test', function(req, res) {
 	log("test"); 
-	var query = 'SELECT * FROM cliente'; 
+	var query = 'SELECT * FROM Users'; 
 	
 	excQuery(query, function(err,response) {
 		log('****************RESPONDI*************************'+response); 

@@ -15,7 +15,7 @@ router.get('/mysql', function(req, res) {
 				err: err.code
 			});
 		} else {
-			connection.query('SELECT * FROM usuarios', function(err, rows, fields) {
+			connection.query('SELECT * FROM Users', function(err, rows, fields) {
 				if (err) {
 					console.error(err);
 					res.statusCode = 500;
