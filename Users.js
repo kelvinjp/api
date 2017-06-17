@@ -115,7 +115,7 @@ router.post('/facturing/Users', function(req, res) {
 			//Si no existe el user o email, procedemos a crearlo
 			if(response.length === 0){
 				excQuery(insertQuery,function(errInsert,responseInsert){
-					if (err) {
+					if (errInsert) {
 						res.json(errInsert); 
 					} else {
 						res.json(responseInsert);

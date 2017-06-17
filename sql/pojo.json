@@ -1,0 +1,81 @@
+{
+    "MainCurrencyId": 0,
+    "Enabled": 1,
+    "Name": "Name",
+    "IdentificationNumber": "402393238",
+    "IdentificationType": "RNC",
+    "Email": "Email@Email.com",
+    "Phone": "8098887777",
+    "Mobile": "8093332211",
+    "Fax": "8093332221",
+    "AddressLine1": "AddressLine1",
+    "AddressLine2": "AddressLine2",
+    "City": "DN",
+    "LogoUrl": "http://asdf",
+    "State": "Snato Domingo",
+    "CountryId": "DO",
+    "Created": "Created",
+    "CreatedBy": "CreatedBy",
+    "LastUpdated": "LastUpdated",
+    "UpdatedBy": "UpdatedBy"
+}
+
+{
+    "MainCurrencyId" : req.body.MainCurrencyId,
+    "Enabled" : req.body.Enabled,
+    "Name" : req.body.Name,
+    "IdentificationNumber" : req.body.IdentificationNumber,
+    "IdentificationType" : req.body.IdentificationType,
+    "Email" : req.body.Email,
+    "Phone" : req.body.Phone,
+    "Mobile" : req.body.Mobile,
+    "Fax" : req.body.Fax,
+    "AddressLine1" : req.body.AddressLine1,
+    "AddressLine2" : req.body.AddressLine2,
+    "City" : req.body.City,
+    "LogoUrl" : req.body.LogoUrl,
+    "State" : req.body.State,
+    "CountryId" : req.body.CountryId
+}
+----Currencies
+
+{
+"Id" : req.body.Id,
+"Enabled" : req.body.Enabled,
+"Name" : req.body.Name,
+"ExchangeRate" : req.body.ExchangeRate,
+"Created" : req.body.Created,
+"CreatedBy" : req.body.CreatedBy,
+"LastUpdated" : req.body.LastUpdated,
+"UpdatedBy" : req.body.UpdatedBy
+}
+
+
+
+------Products
+{
+    "Id": "Id",
+    "CategoryId": "CategoryId",
+    "Enabled": "Enabled",
+    "CompanyId": "CompanyId",
+    "Name": "Name",
+    "Cost": "Cost",
+    "Price": "Price",
+    "Created": "Created",
+    "CreatedBy": "CreatedBy",
+    "LastUpdated": "LastUpdated",
+    "UpdatedBy": "UpdatedBy"
+}
+
+
+-------------Categories
+{
+    "Id": "Id",
+    "Enabled": "Enabled",
+    "Name": "Name",
+    "ParentCategoryId": "ParentCategoryId",
+    "Created": "Created",
+    "CreatedBy": "CreatedBy",
+    "LastUpdated": "LastUpdated",
+    "UpdatedBy": "UpdatedBy"
+}

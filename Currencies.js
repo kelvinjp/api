@@ -12,11 +12,11 @@ var secret = 'this is the secret secret secret 12356';
 
 
 /**
- * Retorna una lista de todas comanias registradas
+ * Retorna una lista de todas las monedas
  *
  **************************************************/
-router.get('/facturing/Companies/', function(req, res) {
-	var query = "SELECT * FROM Companies"; 
+router.get('/facturing/Currencies/', function(req, res) {
+	var query = "SELECT * FROM Currencies"; 
 		
 	excQuery(query,function(err,response){
 		if (err) {
@@ -29,11 +29,11 @@ router.get('/facturing/Companies/', function(req, res) {
 
 
 /**
- * Retorna una compania dado su Id
+ * Retorna una moneda dado su Id
  *
  **************************************************/
-router.get('/facturing/Companies/:Id', function(req, res) {
-	var query = "SELECT * FROM `Companies` WHERE Id=?"; 
+router.get('/facturing/Currencies/:Id', function(req, res) {
+	var query = "SELECT * FROM `Currencies` WHERE Id=?"; 
 	var inserts = [req.params.Id];
 		query = mysql.format(query, inserts);
 	excQuery(query,function(err,response){
@@ -47,11 +47,11 @@ router.get('/facturing/Companies/:Id', function(req, res) {
 
 
 /**
- * Elimina una compania dado su Id
+ * Elimina una moneda dado su Id
  *
  **************************************************/
-router.delete('/facturing/Companies/:Id', function(req, res) {
-	var query = "DELETE FROM `Companies` WHERE Id=?"; 
+router.delete('/facturing/Currencies/:Id', function(req, res) {
+	var query = "DELETE FROM `Currencies` WHERE Id=?"; 
 	var inserts = [req.params.Id];
 		query = mysql.format(query, inserts);
 	excQuery(query,function(err,response){
@@ -68,11 +68,11 @@ router.delete('/facturing/Companies/:Id', function(req, res) {
 
 
 
-/***********************AGREGA Una Compania**************************
- * Para agregar una compania cremamos una variable datos con los datos de
- * la compania agregar y le pasamos esa variable al INSERT
+/***********************AGREGA Una moneda**************************
+ * Para agregar una moneda cremamos una variable datos con los datos de
+ * la moneda agregar y le pasamos esa variable al INSERT
  **********************************************************************/
-router.post('/facturing/Companies', function(req, res) {
+router.post('/facturing/Currencies', function(req, res) {
 	token = req.headers.authorization.substring(7); 
 	var decoded = jwt.verify(token, secret);
 	log(decoded); 
@@ -80,27 +80,17 @@ router.post('/facturing/Companies', function(req, res) {
 
 	var data = 
 		{
-			"MainCurrencyId": req.body.MainCurrencyId,
-			"Name": req.body.Name,
-			"IdentificationNumber": req.body.IdentificationNumber,
-			"IdentificationType": req.body.IdentificationType,
-			"Email": req.body.Email,
-			"Phone": req.body.Phone,
-			"Mobile": req.body.Mobile,
-			"Fax": req.body.Fax,
-			"AddressLine1": req.body.AddressLine1,
-			"AddressLine2": req.body.AddressLine2,
-			"City": req.body.City,
-			"LogoUrl": req.body.LogoUrl,
-			"State": req.body.State,
-			"CountryId": req.body.CountryId,
-			"CreatedBy": decoded.Username,
-			"UpdatedBy": decoded.Username
+			"Id" : req.body.Id,
+			"Enabled" : req.body.Enabled,
+			"Name" : req.body.Name,
+			"ExchangeRate" : req.body.ExchangeRate,
+			"CreatedBy" : decoded.Username,
+			"UpdatedBy" : decoded.Username
 		};
 	console.log(data);
 	
 	var insertQuery = "INSERT INTO ?? SET ?"; 
-	var inserts = ['Companies', data]; 
+	var inserts = ['Currencies', data]; 
 	insertQuery = mysql.format(insertQuery, inserts);
 	log(insertQuery); 
 	//Consultamos si existe
@@ -113,38 +103,28 @@ router.post('/facturing/Companies', function(req, res) {
 	});	
 });
 
-/***********************EDITAR COMPANIA**************************
+/***********************EDITAR moneda**************************
  * Cremamos una variable datos con los datos de la
- * compania EDITAR y le pasamos esa variable al UPDATE
+ * moneda EDITAR y le pasamos esa variable al UPDATE
  **********************************************************************/
-router.put('/facturing/Companies', function(req, res) {
+router.put('/facturing/Currencies', function(req, res) {
 	token = req.headers.authorization.substring(7); 
 	var decoded = jwt.verify(token, secret);
 	log(decoded); 
 
 	var data = 
-	{
-			"MainCurrencyId": req.body.MainCurrencyId,
-			"Name": req.body.Name,
-			"IdentificationNumber": req.body.IdentificationNumber,
-			"IdentificationType": req.body.IdentificationType,
-			"Email": req.body.Email,
-			"Phone": req.body.Phone,
-			"Mobile": req.body.Mobile,
-			"Fax": req.body.Fax,
-			"AddressLine1": req.body.AddressLine1,
-			"AddressLine2": req.body.AddressLine2,
-			"City": req.body.City,
-			"LogoUrl": req.body.LogoUrl,
-			"State": req.body.State,
-			"CountryId": req.body.CountryId,
-			"UpdatedBy": decoded.Username
+		{
+			"Id" : req.body.Id,
+			"Enabled" : req.body.Enabled,
+			"Name" : req.body.Name,
+			"ExchangeRate" : req.body.ExchangeRate,
+			"UpdatedBy" : decoded.Username
 		};
 
 	jsonlog("UPDATE: ",data);
 	
 	var insertQuery = "UPDATE  ?? SET ? WHERE Id=?"; 
-	var inserts = ['Companies', data, req.body.Id]; 
+	var inserts = ['Currencies', data, req.body.Id]; 
 	insertQuery = mysql.format(insertQuery, inserts);
 	log(insertQuery); 
 	

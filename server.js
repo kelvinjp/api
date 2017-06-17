@@ -43,28 +43,17 @@ app.get('/', function(req, res) {
 var usuarios = require("./usuarios");
 var Users = require("./Users"); 
 var Companies = require("./Companies")
+var Currencies = require("./Currencies")
+var Categories = require("./Categories")
+var Products = require("./Products")
 app.use('/',usuarios);
 app.use('/',Users);
 app.use('/', Companies); 
+app.use('/', Currencies); 
+app.use('/', Categories); 
+app.use('/',Products); 
 
 
-
-
-//Aqui solo probamos que funciona la base de datos y que nos podemos conectar
-
-app.get('/test', function(req, res) {
-	log("test"); 
-	var query = 'SELECT * FROM Users'; 
-	
-	excQuery(query, function(err,response) {
-		log('****************RESPONDI*************************'+response); 
-		if(err){
-			res.json(err); 
-		}else{
-			res.json(response); 
-		}
-	}); 
-});
 /****************************LOGIN LISTO********************
  * Metodo Post para loguearse:
  * 1ro- Verificamos que e usuario y password sean corectos y
@@ -98,7 +87,7 @@ query = mysql.format(query, inserts);
 						};
 						console.log('Logeado corretamente como:' + profile.user + ' ' + profile.name);
 						var token = jwt.sign(profile, secret, {
-							expiresIn: 60 * 60
+							expiresIn: 60 * 60 * 60 * 360
 						});
 						response[0].token = token;
 						res.json(response[0]);
