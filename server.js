@@ -46,12 +46,17 @@ var Companies = require("./Companies")
 var Currencies = require("./Currencies")
 var Categories = require("./Categories")
 var Products = require("./Products")
+var DocumentTypes = require("./DocumentTypes")
+var DocumentsStatuses = require("./DocumentsStatuses")
+
 app.use('/',usuarios);
 app.use('/',Users);
 app.use('/', Companies); 
 app.use('/', Currencies); 
 app.use('/', Categories); 
-app.use('/',Products); 
+app.use('/',Products);  
+app.use('/',DocumentTypes); 
+app.use('/',DocumentsStatuses); 
 
 
 /****************************LOGIN LISTO********************
