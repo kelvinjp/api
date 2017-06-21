@@ -48,6 +48,7 @@ var Categories = require("./Categories")
 var Products = require("./Products")
 var DocumentTypes = require("./DocumentTypes")
 var DocumentsStatuses = require("./DocumentsStatuses")
+var Customers = require("./Customers")
 
 app.use('/',usuarios);
 app.use('/',Users);
@@ -56,7 +57,8 @@ app.use('/', Currencies);
 app.use('/', Categories); 
 app.use('/',Products);  
 app.use('/',DocumentTypes); 
-app.use('/',DocumentsStatuses); 
+app.use('/',DocumentsStatuses);
+app.use('/',Customers); 
 
 
 /****************************LOGIN LISTO********************

@@ -79,3 +79,26 @@
     "LastUpdated": "LastUpdated",
     "UpdatedBy": "UpdatedBy"
 }
+
+
+-----------------DocumentTypes
+{
+"Id":"Id",
+"Name":"Name",
+"Created":"Created",
+"CreatedBy":"CreatedBy",
+"LastUpdated":"LastUpdated",
+"LastUpdatedBy":"LastUpdatedBy",
+}
+
+
+----DocumentsStatuses
+{
+    "Id": "Id",
+    "Name": "Name",
+    "Enabled": "Enabled",
+    "Created": "Created",
+    "CreatedBy": "CreatedBy",
+    "LastUpdated": "LastUpdated",
+    "UpdatedBy": "UpdatedBy",
+}
