@@ -1,39 +1,44 @@
-require('./connection'); 
-var connectionpool = getConn(); 
+require('./connection');
+var connectionpool = getConn();
 
 
 /**
  * Funcion recive un Query y una funcion, la funcion debe recibir el resultado de la ejecusion del query y procesarlo
  */
-excQuery = function (query, cb) {       
-    	connectionpool.getConnection(function(err, connection) {
-                var response = null;
-                var error = null; 
+excQuery = function (query, cb) {
+    connectionpool.getConnection(function (err, connection) {
+        var response = null;
+        var error = null;
+        if (err) {
+            console.error('CONNECTION error: ', err);
+            error = {
+                "status": "error",
+                "data": err,
+                "message": "Error de conexion a la Base de Datos.",
+                "code": err.code
+            };
+            cb(error, response);
+        } else {
+            connection.query(query, function (err, rows, fields) {
                 if (err) {
-                    console.error('CONNECTION error: ', err);
-                    error =  {
-                        result: 'error',
-                        errCode: err.code,
-                        err: err
-                    };
-                    cb(error,response);
+                    console.log('Exc Error' + err);
+                    error = {
+                        "status": "error",
+                        "data": err,
+                        "message": "Error en la ejecusion de instruccion de DB.",
+                        "code": err.code
+                    };;
                 } else {
-                    connection.query(query, function(err, rows, fields) {
-                        if (err) {
-                            console.log('Exc Error'+err);
-                            error= {
-                                    result: 'error',
-                                    errCode: err.code,
-                                    errMessage: err
-                                };
-                        }else {
-                            response = rows;
-                        }	
-                        connection.release();
-                        cb(error,response);
-                    });
+                    response = {
+                        "status": "success",
+                        "data": rows
+                    };
                 }
-        });
+                connection.release();
+                cb(error, response);
+            });
+        }
+    });
 }
 
 /**
@@ -42,42 +47,48 @@ excQuery = function (query, cb) {
  * String con el nombre de la tabal
  * Funcion para el CallBack
  */
-excInsert = function (data,table, cb) {       
-    	connectionpool.getConnection(function(err, connection) {
-                var response = null;
-                var error = null;
+excInsert = function (data, table, cb) {
+    connectionpool.getConnection(function (err, connection) {
+        var response = null;
+        var error = null;
+        if (err) {
+            console.error('CONNECTION error: ', err);
+            error = {
+                "status": "error",
+                "data": err,
+                "message": "Error de conexion a la Base de Datos.",
+                "code": err.code
+            };
+            cb(error, response);
+        } else {
+            connection.query("INSERT INTO `" + table + "` SET ?", data, function (err, result) {
                 if (err) {
-                    console.error('CONNECTION error: ', err);
-                    error =  {
-                        result: 'error',
-                        errCode: err.code,
-                        err: err
-                    };
-                    cb(error, response);
+                    console.log('Insert Error' + err);
+                    error = {
+                "status": "error",
+                "data": err,
+                "message": "Error en la ejecusion de instruccion de DB.",
+                "code": err.code
+            };
                 } else {
-                    connection.query("INSERT INTO `"+ table +"` SET ?", data, function(err, result) {
-                        if (err) {
-                            console.log('Insert Error'+ err);
-                            error = {
-                                    result: 'error',
-                                    errCode: err.code,
-                                    errMessage: err
-                                };
-                        }else {
-                            response = result;
-                        }	
-                        connection.release();
-                        cb(error, response);
-                    });
+                    response = {
+                        "status": "success",
+                        "data": result
+                    };
                 }
-        });
+                connection.release();
+                cb(error, response);
+            });
+        }
+    });
 }
 
 
-log = function (toLog){
-    console.log(toLog); 
+
+log = function (toLog) {
+    console.log(toLog);
 }
 
-jsonlog = function (coment,toLog){
-    console.log(coment + JSON.stringify(toLog)); 
+jsonlog = function (coment, toLog) {
+    console.log(coment + JSON.stringify(toLog));
 }

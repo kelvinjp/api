@@ -50,6 +50,7 @@ var DocumentTypes = require("./DocumentTypes")
 var DocumentsStatuses = require("./DocumentsStatuses")
 var Customers = require("./Customers")
 var Taxes = require("./Taxes")
+var Documents = require("./Documents"); 
 
 app.use('/',usuarios);
 app.use('/',Users);
@@ -60,7 +61,8 @@ app.use('/',Products);
 app.use('/',DocumentTypes); 
 app.use('/',DocumentsStatuses);
 app.use('/',Customers); 
-app.use('/',Taxes); 
+app.use('/',Taxes);
+app.use('/',Documents); 
 
 
 /****************************LOGIN LISTO********************
