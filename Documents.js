@@ -22,7 +22,7 @@ router.get('/facturing/Documents', function (req, res) {
 
 	var inserts = [decoded.CompanyId];
 	query = mysql.format(query, inserts);
-	
+
 	queryString(query, req.query, function (q) {
 		log(q);
 		excQuery(q, function (err, response) {
@@ -129,9 +129,6 @@ router.delete('/facturing/Documents/:Id', function (req, res) {
 
 });
 
-
-
-
 /***********************AGREGAR Documento LISTO**************************
  * Para agregar un Documento cremamos una variable datos con los datos del
  * Documento agregar y le pasamos esa variable al INSERT
@@ -143,6 +140,7 @@ router.post('/facturing/Documents', function (req, res) {
 	if (validacion.status === 'success') {
 		var document = {
 			"CompaniesId": decoded.CompanyId,
+			"UsersId": decoded.Id,
 			"CurrencyId": req.body.CurrencyId,
 			"CustomerId": req.body.CustomerId,
 			"StatusId": req.body.StatusId,
@@ -239,6 +237,7 @@ router.post('/facturing/Documents', function (req, res) {
 				if (err) {
 					res.json(err);
 				} else {
+					response.data.insertId = document.Id; 
 					res.json(response);
 				}
 			});
