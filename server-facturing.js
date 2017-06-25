@@ -89,19 +89,19 @@ query = mysql.format(query, inserts);
 		if(err){
 			res.json(err); 
 		}else{
-			if (response.length > 0) {
+				if (response.data.length > 0) {
 						var profile = {
-							Username: response[0].Username,
-							Id:response[0].Id,
-							CompanyId:response[0].CompanyId,
-							date: response[0].Created,
+							Username: response.data[0].Username,
+							Id:response.data[0].Id,
+							CompanyId:response.data[0].CompanyId,
+							date: response.data[0].Created,
 						};
 						console.log('Logeado corretamente como:' + profile.user + ' ' + profile.name);
 						var token = jwt.sign(profile, secret, {
 							expiresIn: 60 * 60 * 60 * 360
 						});
-						response[0].token = token;
-						res.json(response[0]);
+						response.data[0].token = token;
+						res.json(response.data[0]);
 					} else {
 						res.status(401).send('Wrong user or password');
 					}
