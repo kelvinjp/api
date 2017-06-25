@@ -16,7 +16,6 @@ var secret = 'this is the secret secret secret 12356';
  *
  **************************************************/
 router.get('/facturing/Products/', function(req, res) {
-	
 	token = req.headers.authorization.substring(7); 
 	var decoded = jwt.verify(token, secret);
 	log(decoded); 
@@ -24,12 +23,15 @@ router.get('/facturing/Products/', function(req, res) {
 	var inserts = [decoded.CompanyId];
 		query = mysql.format(query, inserts);
 	
-	excQuery(query,function(err,response){
-		if (err) {
-			res.json(err); 
-		} else {
-			res.json(response);
-		}
+	queryString(query, req.query, function (q) {
+		log(q);
+		excQuery(q, function (err, response) {
+			if (err) {
+				res.json(err);
+			} else {
+				res.json(response);
+			}
+		});
 	});
 });
 

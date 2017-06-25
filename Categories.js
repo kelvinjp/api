@@ -15,15 +15,17 @@ var secret = 'this is the secret secret secret 12356';
  * Retorna una lista de todas las monedas
  *
  **************************************************/
-router.get('/facturing/Categories/', function(req, res) {
+router.get('/facturing/Categories', function(req, res) {
 	var query = "SELECT * FROM Categories"; 
-		
-	excQuery(query,function(err,response){
-		if (err) {
-			res.json(err); 
-		} else {
-			res.json(response);
-		}
+	queryString(query, req.query, function (q) {
+		log(q);
+		excQuery(q, function (err, response) {
+			if (err) {
+				res.json(err);
+			} else {
+				res.json(response);
+			}
+		});
 	});
 });
 

@@ -16,21 +16,24 @@ var secret = 'this is the secret secret secret 12356';
  *
  **************************************************/
 router.get('/facturing/Documents', function (req, res) {
-
 	token = req.headers.authorization.substring(7);
 	var decoded = jwt.verify(token, secret);
-	log(decoded);
-	var query = "SELECT  * FROM Documents WHERE CompaniesId =?";
+	var query = "SELECT  * FROM Documents WHERE CompaniesId =? ";
+
 	var inserts = [decoded.CompanyId];
 	query = mysql.format(query, inserts);
-
-	excQuery(query, function (err, response) {
-		if (err) {
-			res.json(err);
-		} else {
-			res.json(response);
-		}
+	
+	queryString(query, req.query, function (q) {
+		log(q);
+		excQuery(q, function (err, response) {
+			if (err) {
+				res.json(err);
+			} else {
+				res.json(response);
+			}
+		});
 	});
+
 });
 
 
@@ -59,19 +62,19 @@ router.get('/facturing/Documents/:Id', function (req, res) {
 					res.json(errDetails);
 				} else {
 					jsonlog(responseDetails);
-					if(document !== undefined){
-document.Details = responseDetails.data;
-					res.json({
-						"status": "success",
-						"data": document
-					});
-					}else {
+					if (document !== undefined) {
+						document.Details = responseDetails.data;
 						res.json({
-						"status": "fail",
-						"message": "document not found"
-					});
+							"status": "success",
+							"data": document
+						});
+					} else {
+						res.json({
+							"status": "fail",
+							"message": "document not found"
+						});
 					}
-					
+
 				}
 			});
 		}
@@ -120,8 +123,8 @@ router.delete('/facturing/Documents/:Id', function (req, res) {
 		});
 	}
 
-	deleteDetails(function(){
-		deleteDocument(); 
+	deleteDetails(function () {
+		deleteDocument();
 	})
 
 });

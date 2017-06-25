@@ -41,3 +41,23 @@ ALTER TABLE DocumentsStatuses CHANGE LastUpdated LastUpdated  DATETIME DEFAULT C
 ALTER TABLE DocumentsTypes CHANGE LastUpdated LastUpdated  DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
 ALTER TABLE Payments CHANGE LastUpdated LastUpdated  DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
 ALTER TABLE Products CHANGE LastUpdated LastUpdated  DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+
+
+
+INSERT INTO DocumentsDetails (TaxesId,DocumentsId,ProductsId,Enabled,Description,Quantity,Price,DiscountValue,DiscountType,Amount,CreatedBy,UpdatedBy)
+VALUES
+(<{Id: }>,
+<{TaxesId: }>,
+<{DocumentsId: }>,
+<{ProductsId: }>,
+<{Enabled: 1}>,
+<{Description: }>,
+<{Quantity: }>,
+<{Price: }>,
+<{DiscountValue: }>,
+<{DiscountType: }>,
+<{Amount: }>,
+<{Created: }>,
+<{CreatedBy: }>,
+<{LastUpdated: CURRENT_TIMESTAMP}>,
+<{UpdatedBy: }>);

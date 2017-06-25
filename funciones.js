@@ -1,4 +1,5 @@
 require('./connection');
+var mysql = require('mysql')
 var connectionpool = getConn();
 
 
@@ -97,15 +98,18 @@ jsonlog = function (coment, toLog) {
  * Funciones para validaciones de tipos de datos
  */
 isInt = function (n) {
+    n = parseInt(n);
     return Number(n) === n && n % 1 === 0;
 }
 
 isFloat = function (n) {
-    return Number(n) === n && n % 1 !== 0;
+    n = parseFloat(n);
+    log(n);
+    return Number(n) === n && (n % 1 !== 0 || n % 1 === 0);
 }
 
 isString = function (n) {
-    if ((typeof n === 'string' || n instanceof String) && n.length > 0 )
+    if ((typeof n === 'string' || n instanceof String) && n.length > 0)
         return true;
     else
         return false;
@@ -144,7 +148,7 @@ vlCreateDocument = function (body) {
         }
     }
 
-    if((body.Date instanceof Date)){
+    if ((body.Date instanceof Date)) {
         error = {
             "status": "fail",
             "message": "Date is not date type"
@@ -153,10 +157,10 @@ vlCreateDocument = function (body) {
 
     if (error === null)
         return {
-        "status": "success",
-        "message": "Message validated"
+            "status": "success",
+            "message": "Message validated"
         }
-    else  return error; 
+    else return error;
 
     //  "CurrencyId": "DOP", varchar Not NULL
     // "CustomerId": 1, INT NOT NULL
@@ -166,4 +170,44 @@ vlCreateDocument = function (body) {
     // "Date": "2016-06-01", DATE NOT NULL
     // "ExpirationDate": "2016-06-30", DATE 
     // "Status": "Status", NULL 
+}
+
+ queryString = function (query, strQuery,CallBack) {
+    var limit = (strQuery.limit == undefined ? 20 : parseInt(strQuery.limit));
+    var offset = (strQuery.offset == undefined ? 0 : parseInt(strQuery.offset));
+    var sort = (strQuery.sort == undefined ? '-Id' : strQuery.sort);
+    delete strQuery.limit;
+    delete strQuery.offset;
+    delete strQuery.sort;
+
+    var like = ' AND (';
+    var likeInsert = [];
+    var objItems = Object.keys(strQuery);
+    objItems.forEach(function (key, index, objItems) {
+        // key: the name of the object key
+        // index: the ordinal position of the key within the object
+        like = like + key + ' LIKE "%?%" ';
+        likeInsert[index] = strQuery[key]; 
+        if (index != objItems.length - 1) {
+            like = like + ' AND '
+        }
+    });
+    if (like != ' AND (') {
+        like = like + ' ) ORDER BY ? ';
+    } else {
+       like = ' ORDER BY ? '
+    }
+         likeInsert[likeInsert.length] = sort;
+
+        like = mysql.format(like,likeInsert); 
+        like = like.replace(/\'/g,""); 
+        likeInsert = []; 
+        query = "SELECT * FROM   ("+query + like + " ) as result   limit ? offset ?";
+
+
+    likeInsert[likeInsert.length] = limit;
+    likeInsert[likeInsert.length] = offset;
+
+    query = mysql.format(query, likeInsert);
+    CallBack(query);
 }

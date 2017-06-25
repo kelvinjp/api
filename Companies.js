@@ -15,15 +15,17 @@ var secret = 'this is the secret secret secret 12356';
  * Retorna una lista de todas comanias registradas
  *
  **************************************************/
-router.get('/facturing/Companies/', function(req, res) {
-	var query = "SELECT * FROM Companies"; 
-		
-	excQuery(query,function(err,response){
-		if (err) {
-			res.json(err); 
-		} else {
-			res.json(response);
-		}
+router.get('/facturing/Companies', function(req, res) {
+		var query = "SELECT * FROM Companies "; 
+		queryString(query, req.query, function (q) {
+		log(q);
+		excQuery(q, function (err, response) {
+			if (err) {
+				res.json(err);
+			} else {
+				res.json(response);
+			}
+		});
 	});
 });
 

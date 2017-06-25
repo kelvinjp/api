@@ -15,15 +15,17 @@ var secret = 'this is the secret secret secret 12356';
  * Retorna una lista de todas las monedas
  *
  **************************************************/
-router.get('/facturing/Currencies/', function(req, res) {
-	var query = "SELECT * FROM Currencies"; 
-		
-	excQuery(query,function(err,response){
-		if (err) {
-			res.json(err); 
-		} else {
-			res.json(response);
-		}
+router.get('/facturing/Currencies', function(req, res) {
+var query = "SELECT * FROM Currencies "; 
+	queryString(query, req.query, function (q) {
+		log(q);
+		excQuery(q, function (err, response) {
+			if (err) {
+				res.json(err);
+			} else {
+				res.json(response);
+			}
+		});
 	});
 });
 

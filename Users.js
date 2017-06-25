@@ -25,12 +25,15 @@ router.get('/facturing/Users/', function(req, res) {
 	var inserts = [decoded.CompanyId];
 		query = mysql.format(query, inserts);
 	
-	excQuery(query,function(err,response){
-		if (err) {
-			res.json(err); 
-		} else {
-			res.json(response);
-		}
+	queryString(query, req.query, function (q) {
+		log(q);
+		excQuery(q, function (err, response) {
+			if (err) {
+				res.json(err);
+			} else {
+				res.json(response);
+			}
+		});
 	});
 });
 

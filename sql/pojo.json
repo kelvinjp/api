@@ -102,3 +102,164 @@
     "LastUpdated": "LastUpdated",
     "UpdatedBy": "UpdatedBy",
 }
+
+
+-----------------Customers
+
+{
+    "Id":"a",
+    "CompaniesId":"a",
+    "Name":"a",
+    "CurrencyId":"a",
+    "Enabled":"a",
+    "IdentificationNumber":"a",
+    "IdentificationType":"a",
+    "ContactFirstName":"a",
+    "ContactLastName":"a",
+    "Email":"a",
+    "Phone":"a",
+    "Mobile":"a",
+    "Fax":"a",
+    "AddressLine1":"a",
+    "AddressLine2":"a",
+    "City":"a",
+    "State":"a",
+    "CountryId":"a",
+    "Created":"a",
+    "CreatedBy":"a",
+    "LastUpdated":"a",
+    "UpdatedBy":"a",
+}
+
+
+---------------------Taxes
+
+{
+"Id":"Id",
+"CompaniesId":"CompaniesId",
+"Name":"Name",
+"value":"value",
+"Enabled":"Enabled",
+"Created":"Created",
+"CretatedBy":"CretatedBy",
+"LastUpdate":"LastUpdate",
+"UpdateBy":"UpdateBy",
+}
+
+{
+    "Id":req.body.Id,
+    "CompaniesId":req.body.CompaniesId,
+    "Name":req.body.Name,
+    "value":req.body.value,
+    "Enabled":req.body.Enabled,
+    "Created":req.body.Created,
+    "CretatedBy":req.body.CretatedBy,
+    "LastUpdate":req.body.LastUpdate,
+    "UpdateBy":req.body.UpdateBy,
+}
+
+
+
+----Creacion Document
+
+{
+    "CurrencyId": "DOP", varchar Not NULL
+    "CustomerId": 1, INT NOT NULL
+    "StatusId": 1,  INT NOT NULL
+    "TypeId": 2,    INT NOT NULL
+    "Enabled": 1,   INT NOT NULL
+    "DocumentsId": null,
+    "Number": null, ONLY CAN BE NULL IF TYPE != 2
+    "Date": "2016-06-01", DATE NOT NULL
+    "ExpirationDate": "2016-06-30", DATE 
+    "Footer": "Esto es un comentario", 
+    "Amount": "2758",
+    "PurchaseOrder": "5468213",
+    "ExchangeRate": "47.5",
+    "Memo": "Esto es un comentario",
+    "Subheading": "Projecto X",
+    "NumberPrefix": "NumberPrefix",
+    "Status": "Status", NULL 
+    "Details":  [ NOT NULL  
+        {
+            
+            "TaxesId": 1,
+            "ProductsId": 2, NOT NULL
+            "Enabled": 1,   
+            "Description": "Marmol Crema Marfil",
+            "Quantity": 3.2, NOT NULL
+            "Price": 120, NOT NULL
+            "DiscountValue": null, 
+            "DiscountType": null,
+            "Amount": 1111
+        },
+        {
+            "TaxesId": 1,
+            "ProductsId": 2,
+            "Enabled": 1,
+            "Description": "Marmol Crema Marfil",
+            "Quantity": 3.2,
+            "Price": 120,
+            "DiscountValue": null,
+            "DiscountType": null,
+            "Amount": 1111
+        }
+    ]
+}
+
+-------
+{
+    "Id": 1,
+    "CurrencyId": "DOP",
+    "CustomerId": 1,
+    "StatusId": 1,  
+    "Currencies_Id": null,
+    "TypeId": 1,
+    "Enabled": 1,
+    "DocumentsId": null,
+    "Number": "F888D100000000011011",
+    "Date": "2016-06-01",
+    "ExpirationDate": "2016-06-30",
+    "Footer": "Esto es un comentario",
+    "Amount": "2758",
+    "PurchaseOrder": "5468213",
+    "ExchangeRate": "47.5",
+    "Memo": "Esto es un comentario",
+    "Subheading": "Projecto X",
+    "NumberPrefix": "NumberPrefix", ??????????
+    "Status": "Status", ????????????
+    "CreatedBy": "kpimentel",
+    "LastUpdatedBy": "kpimentel",
+    "Details": [
+        {
+            "Id": 1,
+            "TaxesId": 1,
+            "DocumentsId": 1,
+            "ProductsId": 1,
+            "Enabled": 1,
+            "Description": "Marmol Crema Marfil",
+            "Quantity": 3.2,
+            "Price": 120,
+            "DiscountValue": null,
+            "DiscountType": null,
+            "Amount": 1111,
+            "CreatedBy": "kpimentel",
+            "UpdatedBy": "kpimentel"
+        },
+        {
+            "Id": 2,
+            "TaxesId": 1,
+            "DocumentsId": 1,
+            "ProductsId": 1,
+            "Enabled": 1,
+            "Description": "Marmol Crema Marfil",
+            "Quantity": 3.2,
+            "Price": 120,
+            "DiscountValue": null,
+            "DiscountType": null,
+            "Amount": 1111,
+            "CreatedBy": "kpimentel",
+            "UpdatedBy": "kpimentel"
+        }
+    ]
+}
