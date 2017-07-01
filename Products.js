@@ -15,7 +15,7 @@ var secret = 'this is the secret secret secret 12356';
  * Retorna una lista de todos los productos de una misma empresa
  *
  **************************************************/
-router.get('/facturing/Products/', function(req, res) {
+router.get('/facturing/Products', function(req, res) {
 	token = req.headers.authorization.substring(7); 
 	var decoded = jwt.verify(token, secret);
 	log(decoded); 
@@ -23,13 +23,14 @@ router.get('/facturing/Products/', function(req, res) {
 	var inserts = [decoded.CompanyId];
 		query = mysql.format(query, inserts);
 	
-	queryString(query, req.query, function (q) {
+	queryString(query, req.query, function (q,pag) {
 		log(q);
 		excQuery(q, function (err, response) {
 			if (err) {
 				res.json(err);
 			} else {
-				res.json(response);
+				response.forms = obj_Products.forms; 
+				res.json(addPaginToResponse(response, pag));
 			}
 		});
 	});
@@ -92,11 +93,14 @@ router.post('/facturing/Products', function(req, res) {
 
 	var data = 
 	{
-    "CategoryId": req.body.CategoryId,
+    "CategoriesId": req.body.CategoriesId,
     "CompanyId": decoded.CompanyId,
     "Name": req.body.Name,
     "Cost": req.body.Cost,
     "Price": req.body.Price,
+	"Description": req.body.Description,
+    "TaxesId": req.body.TaxesId,
+    "UnitsId":req.body.UnitsId,
     "CreatedBy": decoded.Username,
     "UpdatedBy": decoded.Username
 }; 
@@ -133,17 +137,20 @@ router.put('/facturing/Products', function(req, res) {
 
 		var data = 
 				{
-				"CategoryId": req.body.CategoryId,
-				"Enabled": req.body.Enabled,
+				"CategoriesId": req.body.CategoriesId,
+				"CompanyId": decoded.CompanyId,
 				"Name": req.body.Name,
 				"Cost": req.body.Cost,
 				"Price": req.body.Price,
+				"Description": req.body.Description,
+				"TaxesId": req.body.TaxesId,
+				"UnitsId": req.body.UnitsId,
 				"Enabled": req.body.Enabled,
 				"UpdatedBy": decoded.Username
 			};
 	jsonlog("UPDATE: ",data);
 	
-	var insertQuery = "UPDATE  ?? SET ? WHERE Id=? and CompanyId=?"; 
+	var insertQuery = "UPDATE  ?? SET ? WHERE Id=?"; 
 	var inserts = ['Products', data, req.body.Id, decoded.CompanyId]; 
 	insertQuery = mysql.format(insertQuery, inserts);
 	log(insertQuery); 

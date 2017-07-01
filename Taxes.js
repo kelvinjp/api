@@ -23,13 +23,14 @@ router.get('/facturing/Taxes', function(req, res) {
 	var query = "SELECT  * FROM Taxes WHERE CompaniesId =?"; 
 	var inserts = [decoded.CompanyId];
 		query = mysql.format(query, inserts);
-	queryString(query, req.query, function (q) {
+	queryString(query, req.query, function (q,pag) {
 		log(q);
 		excQuery(q, function (err, response) {
 			if (err) {
 				res.json(err);
 			} else {
-				res.json(response);
+				response.forms = obj_Taxes.forms; 
+				res.json(addPaginToResponse(response, pag));
 			}
 		});
 	});

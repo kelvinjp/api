@@ -18,13 +18,14 @@ var secret = 'this is the secret secret secret 12356';
 router.get('/facturing/DocumentsStatuses/', function(req, res) {
 	
 	var query = "SELECT  * FROM DocumentsStatuses"; 
-	queryString(query, req.query, function (q) {
+	queryString(query, req.query, function (q,pag) {
 		log(q);
 		excQuery(q, function (err, response) {
 			if (err) {
 				res.json(err);
 			} else {
-				res.json(response);
+				response.forms = obj_DocumentsStatuses.forms; 
+				res.json(addPaginToResponse(response, pag));
 			}
 		});
 	});

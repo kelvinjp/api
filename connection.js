@@ -4,7 +4,7 @@ var connectionpool = mysql.createPool({
 		host: '45.55.242.157',
 		user: 'kelvin',
 		password: 'kj4233pb',
-		database: 'invoicing'
+		database: 'facturing'
   // ,connectionLimit: 10,
   //  supportBigNumbers: true
 	});

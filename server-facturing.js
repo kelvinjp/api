@@ -96,7 +96,7 @@ query = mysql.format(query, inserts);
 							CompanyId:response.data[0].CompanyId,
 							date: response.data[0].Created,
 						};
-						console.log('Logeado corretamente como:' + profile.user + ' ' + profile.name);
+						console.log('Logeado corretamente como:' + profile.Username + ' ' + profile.CompanyId);
 						var token = jwt.sign(profile, secret, {
 							expiresIn: 60 * 60 * 60 * 360
 						});
@@ -106,8 +106,21 @@ query = mysql.format(query, inserts);
 						res.status(401).send('Wrong user or password');
 					}
 		}
+});
+});
+
+app.get('/facturing/tableFields', function (req, res) {
+
+
+	tableStructrure(req.query.tablename, function (response) {
+		response.Object = req.query.tablename; 
+		response.forms = {items:response.data}; 
+		delete response.data; 
+		delete response.status; 
+		res.json(response);
 	}); 
 });
+
 
  var port = 8080; 
 app.listen(port);

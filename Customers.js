@@ -22,13 +22,14 @@ router.get('/facturing/Customers', function(req, res) {
 	var inserts = [decoded.CompanyId];
 		query = mysql.format(query, inserts);
 	
-	queryString(query, req.query, function (q) {
+	queryString(query, req.query, function (q, pag) {
 		log(q);
 		excQuery(q, function (err, response) {
 			if (err) {
 				res.json(err);
 			} else {
-				res.json(response);
+				response.forms = obj_Customers.forms; 
+				res.json(addPaginToResponse(response, pag));
 			}
 		});
 	});
@@ -86,7 +87,7 @@ router.delete('/facturing/Customers/:Id', function(req, res) {
 router.post('/facturing/Customers', function(req, res) {
 		token = req.headers.authorization.substring(7); 
 	var decoded = jwt.verify(token, secret);
-
+jsonlog ("Decode: ", decoded); 
 	var data = 
 		{
 			"CompaniesId": decoded.CompanyId,

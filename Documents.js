@@ -23,13 +23,14 @@ router.get('/facturing/Documents', function (req, res) {
 	var inserts = [decoded.CompanyId];
 	query = mysql.format(query, inserts);
 
-	queryString(query, req.query, function (q) {
+	queryString(query, req.query, function (q,pag) {
 		log(q);
 		excQuery(q, function (err, response) {
 			if (err) {
 				res.json(err);
 			} else {
-				res.json(response);
+				response.forms = obj_Documents.forms; 
+				res.json(addPaginToResponse(response, pag));
 			}
 		});
 	});
@@ -140,7 +141,6 @@ router.post('/facturing/Documents', function (req, res) {
 	if (validacion.status === 'success') {
 		var document = {
 			"CompaniesId": decoded.CompanyId,
-			"UsersId": decoded.Id,
 			"CurrencyId": req.body.CurrencyId,
 			"CustomerId": req.body.CustomerId,
 			"StatusId": req.body.StatusId,

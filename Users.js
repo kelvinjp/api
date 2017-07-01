@@ -15,7 +15,7 @@ var secret = 'this is the secret secret secret 12356';
  * Retorna una lista de todos los usuarios de una misma empresa
  *
  **************************************************/
-router.get('/facturing/Users/', function(req, res) {
+router.get('/facturing/Users', function(req, res) {
 	
 	token = req.headers.authorization.substring(7); 
 	var decoded = jwt.verify(token, secret);
@@ -25,13 +25,14 @@ router.get('/facturing/Users/', function(req, res) {
 	var inserts = [decoded.CompanyId];
 		query = mysql.format(query, inserts);
 	
-	queryString(query, req.query, function (q) {
+	queryString(query, req.query, function (q,pag) {
 		log(q);
 		excQuery(q, function (err, response) {
 			if (err) {
 				res.json(err);
 			} else {
-				res.json(response);
+				response.forms = obj_Users.forms; 
+				res.json(addPaginToResponse(response, pag));
 			}
 		});
 	});
@@ -82,7 +83,7 @@ router.delete('/facturing/Users/:Id', function(req, res) {
  * Para agregar un usuario cremamos una variable datos con los datos del
  * usuario agregar y le pasamos esa variable al INSERT
  **********************************************************************/
-router.post('/facturing/Users', function(req, res) {
+router.post('/Users', function(req, res) {
 	var email = req.body.email;
 	
 	if (email==='')
@@ -90,6 +91,7 @@ router.post('/facturing/Users', function(req, res) {
 
 	var data = {
     "CompanyId":req.body.CompanyId,
+	"TypeId": req.body.TypeId,
     "Username":req.body.Username, 
     "Password":req.body.Password,
     "FirstName":req.body.FirstName, 
@@ -116,7 +118,8 @@ router.post('/facturing/Users', function(req, res) {
 			res.json(err); 
 		} else {
 			//Si no existe el user o email, procedemos a crearlo
-			if(response.length === 0){
+			jsonlog("Users Response:" , response); 
+			if(response.data.length === 0){
 				excQuery(insertQuery,function(errInsert,responseInsert){
 					if (errInsert) {
 						res.json(errInsert); 

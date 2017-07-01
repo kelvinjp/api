@@ -1,7 +1,12 @@
 require('./connection');
+require('./Utils/tables')
+
+var jwt = require('jsonwebtoken');
 var mysql = require('mysql')
 var connectionpool = getConn();
 
+
+var secret = 'this is the secret secret secret 12356';
 
 /**
  * Funcion recive un Query y una funcion, la funcion debe recibir el resultado de la ejecusion del query y procesarlo
@@ -202,6 +207,9 @@ vlCreateDocument = function (body) {
         like = mysql.format(like,likeInsert); 
         like = like.replace(/\'/g,""); 
         likeInsert = []; 
+
+        var strCount = "SELECT COUNT(*) AS TOTAL_ROWS FROM   ("+query + like + " ) as result "; 
+
         query = "SELECT * FROM   ("+query + like + " ) as result   limit ? offset ?";
 
 
@@ -209,5 +217,81 @@ vlCreateDocument = function (body) {
     likeInsert[likeInsert.length] = offset;
 
     query = mysql.format(query, likeInsert);
-    CallBack(query);
+//Busca la cantidad de registros en la db. 
+var pag  = null; 
+log(strCount); 
+    excQuery(strCount, function (errCount, responseCount) {
+			if (errCount) {
+				jsonlog("Err Getting Count: "+errCount);
+			} else {
+				jsonlog("responseCount", responseCount); 
+              pag =  pagin(responseCount.data[0].TOTAL_ROWS, limit, offset); 
+              CallBack(query, pag);
+			}
+		});
+}
+
+pagin = function(total, limit, offset ){        
+    var pag =  {
+        "size": total,
+        "offset": offset,
+        "limit": limit,
+        "first": {
+            "offset": 0,
+            "limit": limit
+        },
+        "last": {
+            "offset":  (total <= limit ? 0 :  Math.ceil(total/limit) -1 ) ,
+            "limit": limit
+        }
+    }
+    return pag; 
+}
+
+addPaginToResponse = function (response,pag){
+    response.size = pag.size;  
+    response.offset = pag.offset;  
+    response.limit = pag.limit;  
+    response.first = pag.first;  
+    response.last = pag.last;  
+return response; 
+
+}
+
+tableStructrure = function(tablename, CallBack){
+var query = "SELECT DISTINCT "+
+" COLUMN_NAME AS name,"+
+" if(IS_NULLABLE= 'NO', 'true', 'false') as requiered,"+
+" case DATA_TYPE"+
+" when  'varchar' then 'string'"+
+" when  'datetime' then 'date'"+
+" else  'number' END "+
+" as type, "+
+" CHARACTER_MAXIMUM_LENGTH as max,"+
+" NULL AS min,"+
+" 'false' as editable   FROM "+
+" INFORMATION_SCHEMA.COLUMNS  WHERE"+
+" TABLE_NAME ='"+ tablename+"'"; 
+log(query); 
+ excQuery(query, function (errCount, response) {
+			if (errCount) {
+				jsonlog("Structure: "+errCount);
+			} else {
+				jsonlog("Structure", response); 
+              CallBack(response);
+			}
+		});
+}
+
+newToken = function (Username, Id, CompanyId, date) {
+    var profile = {
+        Username: Username,
+        Id: Id,
+        CompanyId: CompanyId,
+        date: date,
+    };
+    var token = jwt.sign(profile, secret, {
+        expiresIn: 60 * 60 * 60 * 360
+    });
+    return token;
 }

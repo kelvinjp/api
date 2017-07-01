@@ -1,8 +1,8 @@
 var express = require('express');
- require('./connection'); 
- require('./funciones.js');
+require('./connection');
+require('./funciones.js');
 var mysql = require('mysql')
-var connectionpool = getConn(); 
+var connectionpool = getConn();
 var router = express.Router();
 var moment = require('moment');
 var expressJwt = require('express-jwt');
@@ -15,15 +15,16 @@ var secret = 'this is the secret secret secret 12356';
  * Retorna una lista de todas comanias registradas
  *
  **************************************************/
-router.get('/facturing/Companies', function(req, res) {
-		var query = "SELECT * FROM Companies "; 
-		queryString(query, req.query, function (q) {
+router.get('/facturing/Companies', function (req, res) {
+	var query = "SELECT * FROM Companies ";
+	queryString(query, req.query, function (q, pag) {
 		log(q);
 		excQuery(q, function (err, response) {
 			if (err) {
 				res.json(err);
 			} else {
-				res.json(response);
+				response.forms = obj_Companies.forms;
+				res.json(addPaginToResponse(response, pag));
 			}
 		});
 	});
@@ -34,13 +35,13 @@ router.get('/facturing/Companies', function(req, res) {
  * Retorna una compania dado su Id
  *
  **************************************************/
-router.get('/facturing/Companies/:Id', function(req, res) {
-	var query = "SELECT * FROM `Companies` WHERE Id=?"; 
+router.get('/facturing/Companies/:Id', function (req, res) {
+	var query = "SELECT * FROM `Companies` WHERE Id=?";
 	var inserts = [req.params.Id];
-		query = mysql.format(query, inserts);
-	excQuery(query,function(err,response){
+	query = mysql.format(query, inserts);
+	excQuery(query, function (err, response) {
 		if (err) {
-			res.json(err); 
+			res.json(err);
 		} else {
 			res.json(response);
 		}
@@ -52,16 +53,16 @@ router.get('/facturing/Companies/:Id', function(req, res) {
  * Elimina una compania dado su Id
  *
  **************************************************/
-router.delete('/facturing/Companies/:Id', function(req, res) {
-	var query = "DELETE FROM `Companies` WHERE Id=?"; 
+router.delete('/facturing/Companies/:Id', function (req, res) {
+	var query = "DELETE FROM `Companies` WHERE Id=?";
 	var inserts = [req.params.Id];
-		query = mysql.format(query, inserts);
-	excQuery(query,function(err,response){
+	query = mysql.format(query, inserts);
+	excQuery(query, function (err, response) {
 		if (err) {
-            log("Err..."+err)
-			res.json(err); 
+			log("Err..." + err)
+			res.json(err);
 		} else {
-            jsonlog("res..."+response)
+			jsonlog("res..." + response)
 			res.json(response);
 		}
 	});
@@ -74,13 +75,13 @@ router.delete('/facturing/Companies/:Id', function(req, res) {
  * Para agregar una compania cremamos una variable datos con los datos de
  * la compania agregar y le pasamos esa variable al INSERT
  **********************************************************************/
-router.post('/facturing/Companies', function(req, res) {
-	token = req.headers.authorization.substring(7); 
+router.post('/facturing/Companies', function (req, res) {
+	token = req.headers.authorization.substring(7);
 	var decoded = jwt.verify(token, secret);
-	log(decoded); 
+	log(decoded);
 
 
-	var data = 
+	var data =
 		{
 			"MainCurrencyId": req.body.MainCurrencyId,
 			"Name": req.body.Name,
@@ -100,32 +101,46 @@ router.post('/facturing/Companies', function(req, res) {
 			"UpdatedBy": decoded.Username
 		};
 	console.log(data);
-	
-	var insertQuery = "INSERT INTO ?? SET ?"; 
-	var inserts = ['Companies', data]; 
+
+	var insertQuery = "INSERT INTO ?? SET ?";
+	var inserts = ['Companies', data];
 	insertQuery = mysql.format(insertQuery, inserts);
-	log(insertQuery); 
+	log(insertQuery);
 	//Consultamos si existe
-	excQuery(insertQuery,function(err,response){
+	excQuery(insertQuery, function (err, response) {
 		if (err) {
-			res.json(err); 
+			res.json(err);
 		} else {
-			res.json(response);
+			UpdateQuery = "UPDATE Users SET CompanyId =? WHERE Id = ?";
+			inserts = [response.data.insertId, decoded.Id];
+			UpdateQuery = mysql.format(UpdateQuery, inserts);
+
+			token = newToken(decoded.Username, decoded.Id, response.data.insertId, decoded.date);
+			//Cuando insertamos una nueva compania, hacemos update del user para agregarle el nuevo Id. 
+			excQuery(UpdateQuery, function (err, ResponseUpdated) {
+				if (err) {
+					res.json(err);
+				} else {
+					response.token = token; 
+					res.json(response);
+				}
+			});
+
 		}
-	});	
+	});
 });
 
 /***********************EDITAR COMPANIA**************************
  * Cremamos una variable datos con los datos de la
  * compania EDITAR y le pasamos esa variable al UPDATE
  **********************************************************************/
-router.put('/facturing/Companies', function(req, res) {
-	token = req.headers.authorization.substring(7); 
+router.put('/facturing/Companies', function (req, res) {
+	token = req.headers.authorization.substring(7);
 	var decoded = jwt.verify(token, secret);
-	log(decoded); 
+	log(decoded);
 
-	var data = 
-	{
+	var data =
+		{
 			"MainCurrencyId": req.body.MainCurrencyId,
 			"Name": req.body.Name,
 			"IdentificationNumber": req.body.IdentificationNumber,
@@ -143,16 +158,16 @@ router.put('/facturing/Companies', function(req, res) {
 			"UpdatedBy": decoded.Username
 		};
 
-	jsonlog("UPDATE: ",data);
-	
-	var insertQuery = "UPDATE  ?? SET ? WHERE Id=?"; 
-	var inserts = ['Companies', data, req.body.Id]; 
+	jsonlog("UPDATE: ", data);
+
+	var insertQuery = "UPDATE  ?? SET ? WHERE Id=?";
+	var inserts = ['Companies', data, req.body.Id];
 	insertQuery = mysql.format(insertQuery, inserts);
-	log(insertQuery); 
-	
-	excQuery(insertQuery,function(err,response){
+	log(insertQuery);
+
+	excQuery(insertQuery, function (err, response) {
 		if (err) {
-			res.json(err); 
+			res.json(err);
 		} else {
 			res.json(response);
 		}

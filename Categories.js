@@ -9,21 +9,34 @@ var expressJwt = require('express-jwt');
 var jwt = require('jsonwebtoken');
 var secret = 'this is the secret secret secret 12356';
 
-
+var forms = {
+    "items": [
+      {
+        "name": "Id",
+        "required": true,
+        "type": "string",
+        "max": "144",
+        "min": "0",
+        "editable": true
+      }
+    ]
+  }
 
 /**
  * Retorna una lista de todas las monedas
  *
  **************************************************/
 router.get('/facturing/Categories', function(req, res) {
+
 	var query = "SELECT * FROM Categories"; 
-	queryString(query, req.query, function (q) {
-		log(q);
+	queryString(query, req.query, function (q,pag) {
+		jsonlog("Pagin....." , pag);
 		excQuery(q, function (err, response) {
 			if (err) {
 				res.json(err);
 			} else {
-				res.json(response);
+				response.forms = obj_Categories.forms; 
+				res.json(addPaginToResponse(response, pag));
 			}
 		});
 	});
