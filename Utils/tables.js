@@ -21,7 +21,7 @@ Users
 obj_Categories = {
     "Object": "Categories",
     "forms": {
-        "fiels": [
+        "items": [
             {
                 "name": "Id",
                 "requiered": true,
