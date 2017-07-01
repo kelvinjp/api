@@ -24,71 +24,79 @@ obj_Categories = {
         "fiels": [
             {
                 "name": "Id",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "Enabled",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "true"
+                "max": 1,
+                "min": 0,
+                "show": false,
+                "editable": true
             },
             {
                 "name": "Name",
-                "requiered": "true",
+                "requiered": true,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "true"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "ParentCategoryId",
-                "requiered": "false",
+                "requiered": false,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "true"
+                "max": 2147483647,
+                "min": 0,
+                "show": false,
+                "editable": true
             },
             {
                 "name": "Created",
-                "requiered": "false",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "CreatedBy",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "LastUpdated",
-                "requiered": "false",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "UpdatedBy",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": false,
+                "editable": false
             }
         ]
     }
-}; 
+};
 
 
 obj_Companies = {
@@ -97,270 +105,302 @@ obj_Companies = {
         "items": [
             {
                 "name": "Id",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "MainCurrencyId",
-                "requiered": "true",
+                "requiered": true,
                 "type": "string",
                 "max": 3,
-                "min": null,
-                "editable": "false"
+                "min": 3,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Enabled",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 1,
+                "min": 1,
+                "show": false,
+                "editable": true
             },
             {
                 "name": "Name",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 200,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "IdentificationNumber",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 45,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "IdentificationType",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 45,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Email",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 200,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Phone",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 25,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Mobile",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 25,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Fax",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 25,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "AddressLine1",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "AddressLine2",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "City",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "LogoUrl",
-                "requiered": "false",
-                "type": "number",
+                "requiered": false,
+                "type": "string",
                 "max": 65535,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "State",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "CountryId",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 3,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Created",
-                "requiered": "true",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "CreatedBy",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "LastUpdated",
-                "requiered": "true",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "UpdatedBy",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "Created",
-                "requiered": "false",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "LastUpdated",
-                "requiered": "false",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             }
         ]
     }
-}; 
+};
 obj_Currencies = {
     "Object": "Currencies",
     "forms": {
         "items": [
             {
                 "name": "Id",
-                "requiered": "true",
+                "requiered": true,
                 "type": "string",
                 "max": 3,
-                "min": null,
-                "editable": "false"
+                "min": 3,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "Enabled",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 1,
+                "min": 1,
+                "show": false,
+                "editable": true
             },
             {
                 "name": "Name",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "ExchangeRate",
-                "requiered": "false",
+                "requiered": false,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 999999999,
+                "min": 1,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Created",
-                "requiered": "true",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "CreatedBy",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "LastUpdated",
-                "requiered": "true",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "UpdatedBy",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "Created",
-                "requiered": "false",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "LastUpdated",
-                "requiered": "false",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             }
         ]
     }
-}; 
+};
 
 obj_Customers = {
     "Object": "Customers",
@@ -368,620 +408,694 @@ obj_Customers = {
         "items": [
             {
                 "name": "Id",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "CompaniesId",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "Name",
-                "requiered": "true",
+                "requiered": true,
                 "type": "string",
                 "max": 200,
-                "min": null,
-                "editable": "false"
+                "min": 1,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "CurrencyId",
-                "requiered": "true",
+                "requiered": true,
                 "type": "string",
                 "max": 3,
-                "min": null,
-                "editable": "false"
+                "min": 3,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Enabled",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 1,
+                "min": 1,
+                "show": false,
+                "editable": true
             },
             {
                 "name": "IdentificationNumber",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 40,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "IdentificationType",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 45,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "ContactFirstName",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 45,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "ContactLastName",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 45,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Email",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 200,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Phone",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 25,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Mobile",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 25,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Fax",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 25,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "AddressLine1",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "AddressLine2",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "City",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "State",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "CountryId",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 3,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Created",
-                "requiered": "true",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "CreatedBy",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "LastUpdated",
-                "requiered": "true",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "UpdatedBy",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "Created",
-                "requiered": "false",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "LastUpdated",
-                "requiered": "false",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             }
         ]
     }
-}; 
+};
 obj_DocumentTypes = {
     "Object": "DocumentTypes",
     "forms": {
         "items": [
             {
                 "name": "Id",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "Name",
-                "requiered": "true",
+                "requiered": true,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Created",
-                "requiered": "true",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "CreatedBy",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "LastUpdated",
-                "requiered": "true",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
-                "name": "LastUpdatedBy",
-                "requiered": "false",
+                "name": "UpdatedBy",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "Created",
-                "requiered": "false",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "CreatedBy",
-                "requiered": "true",
+                "requiered": true,
                 "type": "string",
                 "max": 100,
                 "min": null,
-                "editable": "false"
+                "show": true,
+                "editable": false
             },
             {
                 "name": "LastUpdated",
-                "requiered": "false",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "LastUpdatedBy",
-                "requiered": "true",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": false
             }
         ]
     }
-}; 
+};
 obj_Documents = {
     "Object": "Documents",
     "forms": {
         "items": [
             {
                 "name": "Id",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "CurrencyId",
-                "requiered": "true",
+                "requiered": true,
                 "type": "string",
                 "max": 3,
-                "min": null,
-                "editable": "false"
+                "min": 3,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "CustomerId",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "StatusId",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 99,
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Enabled",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 1,
+                "min": 1,
+                "show": false,
+                "editable": true
             },
             {
                 "name": "CompaniesId",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "TypeId",
-                "requiered": "false",
+                "requiered": false,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 99,
+                "min": 0,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "DocumentsId",
-                "requiered": "false",
+                "requiered": false,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Number",
-                "requiered": "false",
+                "requiered": false,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "Date",
-                "requiered": "false",
-                "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "requiered": false,
+                "type": "date",
+                "max": 27,
+                "min": 10,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "ExpirationDate",
-                "requiered": "false",
-                "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "requiered": false,
+                "type": "date",
+                "max": 27,
+                "min": 10,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Footer",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 400,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Amount",
-                "requiered": "false",
+                "requiered": false,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "PurchaseOrder",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "ExchangeRate",
-                "requiered": "false",
+                "requiered": false,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Memo",
-                "requiered": "false",
-                "type": "number",
+                "requiered": false,
+                "type": "String",
                 "max": 65535,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Subheading",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 400,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "NumberPrefix",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 45,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Status",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 45,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Created",
-                "requiered": "false",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "CreatedBy",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "LastUpdated",
-                "requiered": "false",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
-                "name": "LastUpdatedBy",
-                "requiered": "false",
+                "name": "UpdatedBy",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "UsersId",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": false
             }
         ]
     }
-}; 
+};
 obj_DocumentsDetails = {
     "Object": "DocumentsDetails",
     "forms": {
         "items": [
             {
                 "name": "Id",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "ProductsId",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Enabled",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 1,
+                "min": 1,
+                "show": false,
+                "editable": true
             },
             {
                 "name": "DocumentsId",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "TaxesId",
-                "requiered": "false",
+                "requiered": false,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "UnitsId",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 10,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Description",
-                "requiered": "false",
+                "requiered": false,
                 "type": "number",
                 "max": 65535,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Quantity",
-                "requiered": "false",
+                "requiered": false,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Price",
-                "requiered": "false",
+                "requiered": false,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "DiscountValue",
-                "requiered": "false",
+                "requiered": false,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "DiscountType",
-                "requiered": "false",
+                "requiered": false,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "Amount",
-                "requiered": "false",
+                "requiered": false,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "Created",
-                "requiered": "false",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "CreatedBy",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "LastUpdated",
-                "requiered": "false",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "UpdatedBy",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": false,
+                "editable": false
             }
         ]
     }
-}; 
+};
 
 obj_DocumentsStatuses = {
     "Object": "DocumentsStatuses",
@@ -989,868 +1103,951 @@ obj_DocumentsStatuses = {
         "items": [
             {
                 "name": "Id",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "Name",
-                "requiered": "true",
+                "requiered": true,
                 "type": "string",
                 "max": 45,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Enabled",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 1,
+                "min": 1,
+                "show": false,
+                "editable": true
             },
             {
                 "name": "Created",
-                "requiered": "true",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "CreatedBy",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "LastUpdated",
-                "requiered": "true",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "UpdatedBy",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "Created",
-                "requiered": "false",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "LastUpdated",
-                "requiered": "false",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             }
         ]
     }
-}; 
+};
 
 obj_Expenses = {
     "Object": "Expenses",
     "forms": {
         "items": [
             {
-                "name": "id",
-                "requiered": "true",
+                "name": "Id",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "SuppliersId",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "DocumentsId",
-                "requiered": "false",
+                "requiered": false,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Description",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 45,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Date",
-                "requiered": "true",
+                "requiered": true,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Value",
-                "requiered": "false",
+                "requiered": false,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "Status",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "Created",
-                "requiered": "false",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "CreatedBy",
-                "requiered": "true",
+                "requiered": true,
                 "type": "string",
                 "max": 100,
                 "min": null,
-                "editable": "false"
+                "show": true,
+                "editable": false
             },
             {
                 "name": "LastUpdated",
-                "requiered": "false",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "LastUpdatedBy",
-                "requiered": "true",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": false
             }
         ]
     }
-}; 
+};
 obj_Payments = {
     "Object": "Payments",
     "forms": {
         "items": [
             {
                 "name": "Id",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "CurrencyId",
-                "requiered": "true",
+                "requiered": true,
                 "type": "string",
                 "max": 3,
-                "min": null,
-                "editable": "false"
+                "min": 3,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "DocumentsId",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "Date",
-                "requiered": "true",
+                "requiered": true,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Enabled",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 1,
+                "min": 1,
+                "show": false,
+                "editable": true
             },
             {
                 "name": "Type",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 45,
                 "min": null,
-                "editable": "false"
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Amount",
-                "requiered": "false",
+                "requiered": false,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "ExchangeRate",
-                "requiered": "false",
+                "requiered": false,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Reference",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 200,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Memo",
-                "requiered": "false",
+                "requiered": false,
                 "type": "number",
                 "max": 65535,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Created",
-                "requiered": "true",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "CreatedBy",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "LastUpdated",
-                "requiered": "true",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "UpdatedBy",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "DocumentId",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "Created",
-                "requiered": "false",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "LastUpdated",
-                "requiered": "false",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             }
         ]
     }
-}; 
+};
 obj_Products = {
     "Object": "Products",
     "forms": {
         "items": [
             {
                 "name": "Id",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "Enabled",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 1,
+                "min": 1,
+                "show": false,
+                "editable": true
             },
             {
                 "name": "CompanyId",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "Name",
-                "requiered": "true",
+                "requiered": true,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Description",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 50,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "CategoriesId",
-                "requiered": "false",
+                "requiered": false,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "TaxesId",
-                "requiered": "false",
+                "requiered": false,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "UnitsId",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 10,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Cost",
-                "requiered": "false",
+                "requiered": false,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Price",
-                "requiered": "false",
+                "requiered": false,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "Created",
-                "requiered": "true",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "CreatedBy",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "LastUpdated",
-                "requiered": "true",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "UpdatedBy",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "CategoryId",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "Created",
-                "requiered": "false",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "LastUpdated",
-                "requiered": "false",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             }
         ]
     }
-}; 
+};
 obj_Suppliers = {
     "Object": "Suppliers",
     "forms": {
         "items": [
             {
                 "name": "Id",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "SuppliersTypesId",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Name",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 45,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "IdentificationNumber",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 40,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "IdentificationType",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 45,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Phone",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 45,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Created",
-                "requiered": "true",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "CreatedBy",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "LastUpdated",
-                "requiered": "true",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
-                "name": "LastUpdatedBy",
-                "requiered": "false",
+                "name": "UpdatedBy",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": false,
+                "editable": false
             }
         ]
     }
-}; 
+};
 obj_SuppliersTypes = {
     "Object": "SuppliersTypes",
     "forms": {
         "items": [
             {
                 "name": "Id",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "Name",
-                "requiered": "true",
+                "requiered": true,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Created",
-                "requiered": "true",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "CreatedBy",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "LastUpdated",
-                "requiered": "true",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
-                "name": "LastUpdatedBy",
-                "requiered": "false",
+                "name": "UpdatedBy",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": false,
+                "editable": false
             }
         ]
     }
-}; 
+};
 obj_Taxes = {
     "Object": "Taxes",
     "forms": {
         "items": [
             {
                 "name": "Id",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "CompaniesId",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "Name",
-                "requiered": "true",
+                "requiered": true,
                 "type": "string",
                 "max": 45,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "value",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Enabled",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 1,
+                "min": 1,
+                "show": false,
+                "editable": true
             },
             {
                 "name": "Created",
-                "requiered": "true",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "CretatedBy",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 45,
                 "min": null,
-                "editable": "false"
+                "show": true,
+                "editable": false
             },
             {
                 "name": "LastUpdate",
-                "requiered": "true",
+                "requiered": true,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "UpdateBy",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 45,
                 "min": null,
-                "editable": "false"
-            },
-            {
-                "name": "Created",
-                "requiered": "false",
-                "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
-            },
-            {
-                "name": "LastUpdate",
-                "requiered": "false",
-                "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "show": true,
+                "editable": false
             }
         ]
     }
-}; 
+};
 obj_Units = {
     "Object": "Units",
     "forms": {
         "items": [
             {
                 "name": "id",
-                "requiered": "true",
+                "requiered": true,
                 "type": "string",
                 "max": 10,
-                "min": null,
-                "editable": "false"
+                "min": 1,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "name",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 45,
                 "min": null,
-                "editable": "false"
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Created",
-                "requiered": "false",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "CreatedBy",
-                "requiered": "true",
+                "requiered": true,
                 "type": "string",
                 "max": 100,
                 "min": null,
-                "editable": "false"
+                "show": true,
+                "editable": false
             },
             {
                 "name": "LastUpdated",
-                "requiered": "false",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "LastUpdatedBy",
-                "requiered": "true",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": false
             }
         ]
     }
-}; 
+};
 obj_Users = {
     "Object": "Users",
     "forms": {
         "items": [
             {
                 "name": "Id",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "CompanyId",
-                "requiered": "false",
+                "requiered": false,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 2147483647,
+                "min": 0,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "TypeId",
-                "requiered": "true",
+                "requiered": true,
                 "type": "string",
                 "max": 45,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Username",
-                "requiered": "true",
+                "requiered": true,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 4,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "email",
-                "requiered": "false",
+                "requiered": true,
                 "type": "string",
                 "max": 45,
-                "min": null,
-                "editable": "false"
+                "min": 4,
+                "show": true,
+                "editable": false
             },
             {
                 "name": "Password",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
                 "max": 64,
-                "min": null,
-                "editable": "false"
+                "min": 8,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Enabled",
-                "requiered": "true",
+                "requiered": true,
                 "type": "number",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 1,
+                "min": 1,
+                "show": false,
+                "editable": true
             },
             {
                 "name": "FirstName",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "LastName",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": true,
+                "editable": true
             },
             {
                 "name": "Created",
-                "requiered": "true",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "CreatedBy",
-                "requiered": "false",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "LastUpdated",
-                "requiered": "true",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             },
             {
-                "name": "LastUpdatedBy",
-                "requiered": "false",
+                "name": "UpdatedBy",
+                "requiered": false,
                 "type": "string",
                 "max": 100,
-                "min": null,
-                "editable": "false"
+                "min": 0,
+                "show": false,
+                "editable": false
             },
             {
                 "name": "LastUpdated",
-                "requiered": "false",
+                "requiered": false,
                 "type": "date",
-                "max": null,
-                "min": null,
-                "editable": "false"
+                "max": 27,
+                "min": 10,
+                "show": false,
+                "editable": false
             }
         ]
     }
