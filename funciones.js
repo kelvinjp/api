@@ -295,3 +295,13 @@ newToken = function (Username, Id, CompanyId, date) {
     });
     return token;
 }
+
+obj_structure = function (array_obj) {
+
+var obj={}; 
+    for (var x = 0; x < array_obj.length; x++) {
+        obj[ array_obj[x].name ] = null; 
+    }
+jsonlog("obj...", obj)
+return obj; 
+}

@@ -51,6 +51,11 @@ var DocumentsStatuses = require("./DocumentsStatuses")
 var Customers = require("./Customers")
 var Taxes = require("./Taxes")
 var Documents = require("./Documents"); 
+var Payments = require("./Payments"); 
+var Units = require("./Units"); 
+var SuppliersTypes = require("./SuppliersTypes"); 
+var Suppliers = require("./Suppliers"); 
+var Expenses = require("./Expenses"); 
 
 app.use('/',usuarios);
 app.use('/',Users);
@@ -63,6 +68,11 @@ app.use('/',DocumentsStatuses);
 app.use('/',Customers); 
 app.use('/',Taxes);
 app.use('/',Documents); 
+app.use('/',Payments);
+app.use('/',Units);
+app.use('/',SuppliersTypes);
+app.use('/',Suppliers);
+app.use('/',Expenses);
 
 
 /****************************LOGIN LISTO********************
@@ -113,12 +123,14 @@ app.get('/facturing/tableFields', function (req, res) {
 
 
 	tableStructrure(req.query.tablename, function (response) {
-		response.Object = req.query.tablename; 
-		response.forms = {items:response.data}; 
-		delete response.data; 
-		delete response.status; 
+		response.Object = { name: req.query.tablename,
+							 structure: obj_structure(response.data) 
+							}
+		response.forms = { items: response.data };
+		delete response.data;
+		delete response.status;
 		res.json(response);
-	}); 
+	});
 });
 
 

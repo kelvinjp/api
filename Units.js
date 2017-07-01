@@ -13,16 +13,16 @@ var secret = 'this is the secret secret secret 12356';
  * Retorna una lista de todas las monedas
  *
  **************************************************/
-router.get('/facturing/Categories', function(req, res) {
+router.get('/facturing/Units', function(req, res) {
 
-	var query = "SELECT * FROM Categories"; 
+	var query = "SELECT * FROM Units"; 
 	queryString(query, req.query, function (q,pag) {
 		jsonlog("Pagin....." , pag);
 		excQuery(q, function (err, response) {
 			if (err) {
 				res.json(err);
 			} else {
-				response.forms = obj_Categories.forms; 
+				response.forms = obj_Units.forms; 
 				res.json(addPaginToResponse(response, pag));
 			}
 		});
@@ -34,8 +34,8 @@ router.get('/facturing/Categories', function(req, res) {
  * Retorna una moneda dado su Id
  *
  **************************************************/
-router.get('/facturing/Categories/:Id', function(req, res) {
-	var query = "SELECT * FROM `Categories` WHERE Id=?"; 
+router.get('/facturing/Units/:Id', function(req, res) {
+	var query = "SELECT * FROM `Units` WHERE Id=?"; 
 	var inserts = [req.params.Id];
 		query = mysql.format(query, inserts);
 	excQuery(query,function(err,response){
@@ -52,8 +52,8 @@ router.get('/facturing/Categories/:Id', function(req, res) {
  * Elimina una moneda dado su Id
  *
  **************************************************/
-router.delete('/facturing/Categories/:Id', function(req, res) {
-	var query = "DELETE FROM `Categories` WHERE Id=?"; 
+router.delete('/facturing/Units/:Id', function(req, res) {
+	var query = "DELETE FROM `Units` WHERE Id=?"; 
 	var inserts = [req.params.Id];
 		query = mysql.format(query, inserts);
 	excQuery(query,function(err,response){
@@ -74,7 +74,7 @@ router.delete('/facturing/Categories/:Id', function(req, res) {
  * Para agregar una moneda cremamos una variable datos con los datos de
  * la moneda agregar y le pasamos esa variable al INSERT
  **********************************************************************/
-router.post('/facturing/Categories', function(req, res) {
+router.post('/facturing/Units', function(req, res) {
 	token = req.headers.authorization.substring(7); 
 	var decoded = jwt.verify(token, secret);
 	log(decoded); 
@@ -82,15 +82,15 @@ router.post('/facturing/Categories', function(req, res) {
 
 	var data = 
 			{
+			"Id": req.body.Id,
 			"Name": req.body.Name,
-			"ParentCategoryId": req.body.ParentCategoryId,
 			"CreatedBy" : decoded.Username,
-			"UpdatedBy" : decoded.Username
+			"LastUpdatedBy" : decoded.Username
 		};
 	console.log(data);
 	
 	var insertQuery = "INSERT INTO ?? SET ?"; 
-	var inserts = ['Categories', data]; 
+	var inserts = ['Units', data]; 
 	insertQuery = mysql.format(insertQuery, inserts);
 	log(insertQuery); 
 	excQuery(insertQuery,function(err,response){
@@ -106,23 +106,22 @@ router.post('/facturing/Categories', function(req, res) {
  * Cremamos una variable datos con los datos de la
  * moneda EDITAR y le pasamos esa variable al UPDATE
  **********************************************************************/
-router.put('/facturing/Categories', function(req, res) {
+router.put('/facturing/Units', function(req, res) {
 	token = req.headers.authorization.substring(7); 
 	var decoded = jwt.verify(token, secret);
 	log(decoded); 
 
 	var data = 
 		{
-			"Enabled" : req.body.Enabled,
-			"Name" : req.body.Name,
-			"ParentCategoryId": req.body.ParentCategoryId,
-			"UpdatedBy" : decoded.Username
+			"Id": req.body.Id,
+			"Name": req.body.Name,
+			"LastUpdatedBy" : decoded.Username
 		};
 
 	jsonlog("UPDATE: ",data);
 	
 	var insertQuery = "UPDATE  ?? SET ? WHERE Id=?"; 
-	var inserts = ['Categories', data, req.body.Id]; 
+	var inserts = ['Units', data, req.body.Id]; 
 	insertQuery = mysql.format(insertQuery, inserts);
 	log(insertQuery); 
 	
