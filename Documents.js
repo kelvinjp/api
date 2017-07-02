@@ -243,9 +243,8 @@ router.post('/facturing/Documents', function (req, res) {
 			});
 		}
 
-		if (document.TypeId === 2 && (document.Number === undefined || document.Number === null)) {
+		if (document.TypeId === 4 && (document.Number === undefined || document.Number === null)) {
 			getNCF(function () {
-				log("1")
 				CreateDocument(function () {
 					CreateDetails();
 				});
@@ -255,8 +254,6 @@ router.post('/facturing/Documents', function (req, res) {
 				CreateDetails();
 			});
 		}
-
-
 	} else res.json(validacion);
 
 });
