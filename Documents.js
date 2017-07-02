@@ -388,7 +388,7 @@ router.put('/facturing/Documents', function (req, res) {
 			});
 		}
 
-		if (document.TypeId === 2 && (document.Number === undefined || document.Number === null)) {
+		if (document.TypeId === 4 && (document.Number === undefined || document.Number === null)) {
 			getNCF(function () {
 				UpdateDocument(function () {
 					deleteDetails(function () {
