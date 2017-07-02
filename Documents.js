@@ -403,10 +403,7 @@ router.put('/facturing/Documents', function (req, res) {
 				})
 			});
 		}
-
-
 	} else res.json(validacion);
-
 });
 
 module.exports = router;
