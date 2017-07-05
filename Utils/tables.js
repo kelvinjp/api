@@ -181,8 +181,8 @@ obj_Companies = {
                 "type": "string",
                 "max": 25,
                 "min": 0,
-                "show": true,
-                "editable": true
+                "show": false,
+                "editable": false
             },
             {
                 "name": "Fax",
@@ -190,8 +190,8 @@ obj_Companies = {
                 "type": "string",
                 "max": 25,
                 "min": 0,
-                "show": true,
-                "editable": true
+                "show": false,
+                "editable": false
             },
             {
                 "name": "AddressLine1",
@@ -208,8 +208,8 @@ obj_Companies = {
                 "type": "string",
                 "max": 100,
                 "min": 0,
-                "show": true,
-                "editable": true
+                "show": false,
+                "editable": false
             },
             {
                 "name": "City",
