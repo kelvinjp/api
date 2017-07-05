@@ -27,7 +27,7 @@ router.get('/facturing/Documents', function (req, res) {
 		log(q);
 		excQuery(q, function (err, response) {
 			if (err) {
-				res.json(err);
+				res.status(400).json(err);
 			} else {
 				response.forms = obj_Documents.forms; 
 				res.json(addPaginToResponse(response, pag));
@@ -54,7 +54,7 @@ router.get('/facturing/Documents/:Id', function (req, res) {
 	log(detailsQuery)
 	excQuery(docQuery, function (err, response) {
 		if (err) {
-			res.json(err);
+			res.status(400).json(err);
 		} else {
 			document = response.data[0];
 			jsonlog(response);
@@ -100,7 +100,7 @@ router.delete('/facturing/Documents/:Id', function (req, res) {
 
 		excQuery(deleteQuery, function (err, response) {
 			if (err) {
-				res.json(err);
+				res.status(400).json(err);
 			} else {
 				//Si se eliminan los viejos procedemos con los nuevos. 
 				callback();
@@ -116,7 +116,7 @@ router.delete('/facturing/Documents/:Id', function (req, res) {
 		excQuery(query, function (err, response) {
 			if (err) {
 				log("Err..." + err)
-				res.json(err);
+				res.status(400).json(err);
 			} else {
 				jsonlog("res..." + response)
 				res.json(response);
@@ -199,7 +199,7 @@ router.post('/facturing/Documents', function (req, res) {
 
 			excQuery(insertDocument, function (err, response) {
 				if (err) {
-					res.json(err);
+					res.status(400).json(err);
 				} else {
 					document.Id = response.data.insertId;
 					log("Respuesta Crear doc" + response);
@@ -235,7 +235,7 @@ router.post('/facturing/Documents', function (req, res) {
 
 			excQuery(queryDetails, function (err, response) {
 				if (err) {
-					res.json(err);
+					res.status(400).json(err);
 				} else {
 					response.data.insertId = document.Id; 
 					res.json(response);
@@ -328,7 +328,7 @@ router.put('/facturing/Documents', function (req, res) {
 
 			excQuery(insertDocument, function (err, response) {
 				if (err) {
-					res.json(err);
+					res.status(400).json(err);
 				} else {
 					log("Respuesta Crear doc" + response);
 					callback();
@@ -342,7 +342,7 @@ router.put('/facturing/Documents', function (req, res) {
 
 			excQuery(deleteQuery, function (err, response) {
 				if (err) {
-					res.json(err);
+					res.status(400).json(err);
 				} else {
 					//Si se eliminan los viejos procedemos con los nuevos. 
 					callback();
@@ -381,7 +381,7 @@ router.put('/facturing/Documents', function (req, res) {
 
 			excQuery(queryDetails, function (err, response) {
 				if (err) {
-					res.json(err);
+					res.status(400).json(err);
 				} else {
 					res.json(response);
 				}

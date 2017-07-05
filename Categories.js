@@ -20,7 +20,7 @@ router.get('/facturing/Categories', function(req, res) {
 		jsonlog("Pagin....." , pag);
 		excQuery(q, function (err, response) {
 			if (err) {
-				res.json(err);
+				res.status(400).json(err);
 			} else {
 				response.forms = obj_Categories.forms; 
 				res.json(addPaginToResponse(response, pag));
@@ -40,7 +40,7 @@ router.get('/facturing/Categories/:Id', function(req, res) {
 		query = mysql.format(query, inserts);
 	excQuery(query,function(err,response){
 		if (err) {
-			res.json(err); 
+			res.status(400).json(err); 
 		} else {
 			res.json(response);
 		}
@@ -59,7 +59,7 @@ router.delete('/facturing/Categories/:Id', function(req, res) {
 	excQuery(query,function(err,response){
 		if (err) {
             log("Err..."+err)
-			res.json(err); 
+			res.status(400).json(err); 
 		} else {
             jsonlog("res..."+response)
 			res.json(response);
@@ -95,7 +95,7 @@ router.post('/facturing/Categories', function(req, res) {
 	log(insertQuery); 
 	excQuery(insertQuery,function(err,response){
 		if (err) {
-			res.json(err); 
+			res.status(400).json(err); 
 		} else {
 			res.json(response);
 		}
@@ -128,7 +128,7 @@ router.put('/facturing/Categories', function(req, res) {
 	
 	excQuery(insertQuery,function(err,response){
 		if (err) {
-			res.json(err); 
+			res.status(400).json(err); 
 		} else {
 			res.json(response);
 		}

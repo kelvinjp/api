@@ -29,7 +29,7 @@ router.get('/facturing/Users', function(req, res) {
 		log(q);
 		excQuery(q, function (err, response) {
 			if (err) {
-				res.json(err);
+				res.status(400).json(err);
 			} else {
 				response.forms = obj_Users.forms; 
 				res.json(addPaginToResponse(response, pag));
@@ -49,7 +49,7 @@ router.get('/facturing/Users/:Id', function(req, res) {
 		query = mysql.format(query, inserts);
 	excQuery(query,function(err,response){
 		if (err) {
-			res.json(err); 
+			res.status(400).json(err); 
 		} else {
 			res.json(response);
 		}
@@ -68,7 +68,7 @@ router.delete('/facturing/Users/:Id', function(req, res) {
 	excQuery(query,function(err,response){
 		if (err) {
             log("Err..."+err)
-			res.json(err); 
+			res.status(400).json(err); 
 		} else {
             jsonlog("res..."+response)
 			res.json(response);
@@ -115,7 +115,7 @@ router.post('/Users', function(req, res) {
 	excQuery(queryExiste, function(err,response) {
 		jsonlog('****************Consulta Existe**********',response);
 		if(err){
-			res.json(err); 
+			res.status(400).json(err); 
 		} else {
 			//Si no existe el user o email, procedemos a crearlo
 			jsonlog("Users Response:" , response); 
@@ -128,11 +128,12 @@ router.post('/Users', function(req, res) {
 					}
 				});
 			} else {
+				//res.status(401).send('Wrong user or password');
 				var retorno = {
-						estado: false,
-						comentario: 'Usuario/Email ya existe.'
+						status: "fail",
+						message: 'Usuario/Email ya existe.'
 					};
-				res.json(retorno);
+				res.status(409).json(retorno); 
 			}
 		}
 	}); 
@@ -165,7 +166,7 @@ router.put('/facturing/Users', function(req, res) {
 	
 	excQuery(insertQuery,function(err,response){
 		if (err) {
-			res.json(err); 
+			res.status(400).json(err); 
 		} else {
 			res.json(response);
 		}

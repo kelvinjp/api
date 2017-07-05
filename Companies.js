@@ -21,7 +21,7 @@ router.get('/facturing/Companies', function (req, res) {
 		log(q);
 		excQuery(q, function (err, response) {
 			if (err) {
-				res.json(err);
+				res.status(400).json(err);
 			} else {
 				response.forms = obj_Companies.forms;
 				res.json(addPaginToResponse(response, pag));
@@ -41,7 +41,7 @@ router.get('/facturing/Companies/:Id', function (req, res) {
 	query = mysql.format(query, inserts);
 	excQuery(query, function (err, response) {
 		if (err) {
-			res.json(err);
+			res.status(400).json(err);
 		} else {
 			res.json(response);
 		}
@@ -60,7 +60,7 @@ router.delete('/facturing/Companies/:Id', function (req, res) {
 	excQuery(query, function (err, response) {
 		if (err) {
 			log("Err..." + err)
-			res.json(err);
+			res.status(400).json(err);
 		} else {
 			jsonlog("res..." + response)
 			res.json(response);
@@ -109,7 +109,7 @@ router.post('/facturing/Companies', function (req, res) {
 	//Consultamos si existe
 	excQuery(insertQuery, function (err, response) {
 		if (err) {
-			res.json(err);
+			res.status(400).json(err);
 		} else {
 			UpdateQuery = "UPDATE Users SET CompanyId =? WHERE Id = ?";
 			inserts = [response.data.insertId, decoded.Id];
@@ -119,7 +119,7 @@ router.post('/facturing/Companies', function (req, res) {
 			//Cuando insertamos una nueva compania, hacemos update del user para agregarle el nuevo Id. 
 			excQuery(UpdateQuery, function (err, ResponseUpdated) {
 				if (err) {
-					res.json(err);
+					res.status(400).json(err);
 				} else {
 					response.token = token; 
 					res.json(response);
@@ -167,7 +167,7 @@ router.put('/facturing/Companies', function (req, res) {
 
 	excQuery(insertQuery, function (err, response) {
 		if (err) {
-			res.json(err);
+			res.status(400).json(err);
 		} else {
 			res.json(response);
 		}

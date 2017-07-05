@@ -27,13 +27,17 @@ excQuery = function (query, cb) {
         } else {
             connection.query(query, function (err, rows, fields) {
                 if (err) {
-                    console.log('Exc Error' + err);
+                    log('---------------------------');
+                    log('Exc Error' + err);
+                    jsonlog("In error" , err);
                     error = {
                         "status": "error",
                         "data": err,
                         "message": "Error en la ejecusion de instruccion de DB.",
                         "code": err.code
-                    };;
+                    };
+                    log('----------Error-----------------');
+                    log(error);
                 } else {
                     response = {
                         "status": "success",

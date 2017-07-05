@@ -27,7 +27,7 @@ router.get('/facturing/Taxes', function(req, res) {
 		log(q);
 		excQuery(q, function (err, response) {
 			if (err) {
-				res.json(err);
+				res.status(400).json(err);
 			} else {
 				response.forms = obj_Taxes.forms; 
 				res.json(addPaginToResponse(response, pag));
@@ -48,7 +48,7 @@ router.get('/facturing/Taxes/:Id', function(req, res) {
 		query = mysql.format(query, inserts);
 	excQuery(query,function(err,response){
 		if (err) {
-			res.json(err); 
+			res.status(400).json(err); 
 		} else {
 			res.json(response);
 		}
@@ -70,7 +70,7 @@ router.delete('/facturing/Taxes/:Id', function(req, res) {
 	excQuery(query,function(err,response){
 		if (err) {
             log("Err..."+err)
-			res.json(err); 
+			res.status(400).json(err); 
 		} else {
             jsonlog("res..."+response)
 			res.json(response);
@@ -138,7 +138,7 @@ router.put('/facturing/Taxes', function(req, res) {
 	
 	excQuery(insertQuery,function(err,response){
 		if (err) {
-			res.json(err); 
+			res.status(400).json(err); 
 		} else {
 			res.json(response);
 		}
