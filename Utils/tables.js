@@ -154,8 +154,8 @@ obj_Companies = {
                 "type": "string",
                 "max": 45,
                 "min": 0,
-                "show": true,
-                "editable": true
+                "show": false,
+                "editable": false
             },
             {
                 "name": "Email",
