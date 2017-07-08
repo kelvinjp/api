@@ -5,16 +5,17 @@
   "main": "server.js",
   "author": "steve.mcdonald@enginpost.com",
   "dependencies": {
-    "express": "",
-    "mysql": "",
     "body-parser": "",
     "cookie-parser": "",
+    "express": "",
+    "express-jwt": "",
     "express-session": "",
     "multer": "",
+    "mysql": "",
     "passport": "",
     "passport-http": "",
     "passport-local": "",
-    "express-jwt":""
+    "validator": "^8.0.0"
   },
   "scripts": {
     "start": "node server.js"

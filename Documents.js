@@ -23,13 +23,13 @@ router.get('/facturing/Documents', function (req, res) {
 	var inserts = [decoded.CompanyId];
 	query = mysql.format(query, inserts);
 
-	queryString(query, req.query, function (q,pag) {
+	queryString(query, req.query, function (q, pag) {
 		log(q);
 		excQuery(q, function (err, response) {
 			if (err) {
 				res.status(400).json(err);
 			} else {
-				response.forms = obj_Documents.forms; 
+				response.forms = obj_Documents.forms;
 				res.json(addPaginToResponse(response, pag));
 			}
 		});
@@ -135,127 +135,132 @@ router.delete('/facturing/Documents/:Id', function (req, res) {
  * Documento agregar y le pasamos esa variable al INSERT
  **********************************************************************/
 router.post('/facturing/Documents', function (req, res) {
-	token = req.headers.authorization.substring(7);
-	var decoded = jwt.verify(token, secret);
-	var validacion = vlCreateDocument(req.body);
-	if (validacion.status === 'success') {
-		var document = {
-			"CompaniesId": decoded.CompanyId,
-			"CurrencyId": req.body.CurrencyId,
-			"CustomerId": req.body.CustomerId,
-			"StatusId": req.body.StatusId,
-			"TypeId": req.body.TypeId,
-			"Enabled": req.body.Enabled,
-			"DocumentsId": req.body.DocumentsId,
-			"Number": req.body.Number,
-			"Date": req.body.Date,
-			"ExpirationDate": req.body.ExpirationDate,
-			"Footer": req.body.Footer,
-			"Amount": req.body.Amount,
-			"PurchaseOrder": req.body.PurchaseOrder,
-			"ExchangeRate": req.body.ExchangeRate,
-			"Memo": req.body.Memo,
-			"Subheading": req.body.Subheading,
-			"NumberPrefix": req.body.NumberPrefix,
-			"Status": req.body.Status,
-			"CreatedBy": decoded.Username,
-			"LastUpdatedBy": decoded.Username
-		};
-		var details = req.body.Details;
-		log(document);
-		log("details req: " + details);
-		//Si es una factura y no llega el number o es igual a null, buscamos el ultimo en la db.
+ 
+	var ok = validateRequest(obj_Documents.forms.items, req.body, false);
+	if (ok.length === 0) {
+			token = req.headers.authorization.substring(7);
+		var decoded = jwt.verify(token, secret);
+		var validacion = vlCreateDocument(req.body);
+		if (validacion.status === 'success') {
+			var document = {
+				"CompaniesId": decoded.CompanyId,
+				"CurrencyId": req.body.CurrencyId,
+				"CustomerId": req.body.CustomerId,
+				"StatusId": req.body.StatusId,
+				"TypeId": req.body.TypeId,
+				"Enabled": req.body.Enabled,
+				"DocumentsId": req.body.DocumentsId,
+				"Number": req.body.Number,
+				"Date": req.body.Date,
+				"ExpirationDate": req.body.ExpirationDate,
+				"Footer": req.body.Footer,
+				"Amount": req.body.Amount,
+				"PurchaseOrder": req.body.PurchaseOrder,
+				"ExchangeRate": req.body.ExchangeRate,
+				"Memo": req.body.Memo,
+				"Subheading": req.body.Subheading,
+				"NumberPrefix": req.body.NumberPrefix,
+				"Status": req.body.Status,
+				"CreatedBy": decoded.Username,
+				"LastUpdatedBy": decoded.Username
+			};
+			var details = req.body.Details;
+			log(document);
+			log("details req: " + details);
+			//Si es una factura y no llega el number o es igual a null, buscamos el ultimo en la db.
 
-		var getNCF = function (callback) {
-			//Buscamos el ultimo numero de factura fiscal, si no existe colocamos 1.
-			var ncfQuery = "SELECT MAX(Number) NCF from ?? Where CompaniesId =? and Enabled =1; ";
-			var inserts = ['Documents', decoded.CompanyId];
-			ncfQuery = mysql.format(ncfQuery, inserts);
-			log('select ncf: ' + ncfQuery);
-			excQuery(ncfQuery, function (errNCF, responseNCF) {
-				if (errNCF) {
-					res.json(errNCF);
-				} else {
-					jsonlog('res', responseNCF)
-					if (responseNCF.data[0].NCF != undefined) {
-
-						document.Number = responseNCF.data[0].NCF + 1;
-
+			var getNCF = function (callback) {
+				//Buscamos el ultimo numero de factura fiscal, si no existe colocamos 1.
+				var ncfQuery = "SELECT MAX(Number) NCF from ?? Where CompaniesId =? and Enabled =1; ";
+				var inserts = ['Documents', decoded.CompanyId];
+				ncfQuery = mysql.format(ncfQuery, inserts);
+				log('select ncf: ' + ncfQuery);
+				excQuery(ncfQuery, function (errNCF, responseNCF) {
+					if (errNCF) {
+						res.json(errNCF);
 					} else {
-						log("Respuesta 0:1 ")
-						document.Number = 1;
+						jsonlog('res', responseNCF)
+						if (responseNCF.data[0].NCF != undefined) {
+
+							document.Number = responseNCF.data[0].NCF + 1;
+
+						} else {
+							log("Respuesta 0:1 ")
+							document.Number = 1;
+						}
 					}
-				}
-				callback();
-			});
-		}
-
-		var CreateDocument = function (callback) {
-
-			var insertDocument = "INSERT INTO ?? SET ?";
-			var inserts = ['Documents', document];
-			insertDocument = mysql.format(insertDocument, inserts);
-			log(insertDocument);
-
-			excQuery(insertDocument, function (err, response) {
-				if (err) {
-					res.status(400).json(err);
-				} else {
-					document.Id = response.data.insertId;
-					log("Respuesta Crear doc" + response);
 					callback();
-				}
-			});
-		}
-
-		var CreateDetails = function () {
-			var detailsToInsert = [];
-			for (var i = 0; i < details.length; i++) {
-				detailsToInsert[i] = [details[0].TaxesId,
-				document.Id,
-				details[0].ProductsId,
-					1,
-				details[0].Description,
-				details[0].Quantity,
-				details[0].Price,
-				details[0].DiscountValue,
-				details[0].DiscountType,
-				details[0].Amount,
-				details[0].CreatedBy,
-				details[0].UpdatedBy]
+				});
 			}
-			jsonlog("details to insert", detailsToInsert);
 
-			var queryDetails = "INSERT INTO ??" +
-				"(TaxesId,DocumentsId,ProductsId,Enabled,Description,Quantity,Price,DiscountValue,DiscountType,Amount,CreatedBy,UpdatedBy)" +
-				"VALUES ?";
-			var inserts = ['DocumentsDetails', detailsToInsert];
-			queryDetails = mysql.format(queryDetails, inserts);
-			log(queryDetails);
+			var CreateDocument = function (callback) {
 
-			excQuery(queryDetails, function (err, response) {
-				if (err) {
-					res.status(400).json(err);
-				} else {
-					response.data.insertId = document.Id; 
-					res.json(response);
+				var insertDocument = "INSERT INTO ?? SET ?";
+				var inserts = ['Documents', document];
+				insertDocument = mysql.format(insertDocument, inserts);
+				log(insertDocument);
+
+				excQuery(insertDocument, function (err, response) {
+					if (err) {
+						res.status(400).json(err);
+					} else {
+						document.Id = response.data.insertId;
+						log("Respuesta Crear doc" + response);
+						callback();
+					}
+				});
+			}
+
+			var CreateDetails = function () {
+				var detailsToInsert = [];
+				for (var i = 0; i < details.length; i++) {
+					detailsToInsert[i] = [details[0].TaxesId,
+					document.Id,
+					details[0].ProductsId,
+						1,
+					details[0].Description,
+					details[0].Quantity,
+					details[0].Price,
+					details[0].DiscountValue,
+					details[0].DiscountType,
+					details[0].Amount,
+					details[0].CreatedBy,
+					details[0].UpdatedBy]
 				}
-			});
-		}
+				jsonlog("details to insert", detailsToInsert);
 
-		if (document.TypeId === 4 && (document.Number === undefined || document.Number === null)) {
-			getNCF(function () {
+				var queryDetails = "INSERT INTO ??" +
+					"(TaxesId,DocumentsId,ProductsId,Enabled,Description,Quantity,Price,DiscountValue,DiscountType,Amount,CreatedBy,UpdatedBy)" +
+					"VALUES ?";
+				var inserts = ['DocumentsDetails', detailsToInsert];
+				queryDetails = mysql.format(queryDetails, inserts);
+				log(queryDetails);
+
+				excQuery(queryDetails, function (err, response) {
+					if (err) {
+						res.status(400).json(err);
+					} else {
+						response.data.insertId = document.Id;
+						res.json(response);
+					}
+				});
+			}
+
+			if (document.TypeId === 4 && (document.Number === undefined || document.Number === null)) {
+				getNCF(function () {
+					CreateDocument(function () {
+						CreateDetails();
+					});
+				});
+			} else {
 				CreateDocument(function () {
 					CreateDetails();
 				});
-			});
-		} else {
-			CreateDocument(function () {
-				CreateDetails();
-			});
-		}
-	} else res.json(validacion);
-
+			}
+		} else res.json(validacion);
+	} else {
+		res.status(422).json(ok);
+	}
 });
 
 /***********************EDITAR Documento LISTO**************************

@@ -417,7 +417,7 @@ obj_Customers = {
             },
             {
                 "name": "CompaniesId",
-                "requiered": true,
+                "requiered": false,
                 "type": "number",
                 "max": 2147483647,
                 "min": 0,
@@ -773,7 +773,7 @@ obj_Documents = {
             },
             {
                 "name": "CompaniesId",
-                "requiered": true,
+                "requiered": false,
                 "type": "number",
                 "max": 2147483647,
                 "min": 0,
@@ -931,15 +931,6 @@ obj_Documents = {
                 "max": 100,
                 "min": 0,
                 "show": false,
-                "editable": false
-            },
-            {
-                "name": "UsersId",
-                "requiered": true,
-                "type": "number",
-                "max": 2147483647,
-                "min": 0,
-                "show": true,
                 "editable": false
             }
         ]
@@ -1476,7 +1467,7 @@ obj_Products = {
             },
             {
                 "name": "CompanyId",
-                "requiered": true,
+                "requiered": false,
                 "type": "number",
                 "max": 2147483647,
                 "min": 0,
@@ -1785,7 +1776,7 @@ obj_Taxes = {
             },
             {
                 "name": "CompaniesId",
-                "requiered": true,
+                "requiered": false,
                 "type": "number",
                 "max": 2147483647,
                 "min": 0,

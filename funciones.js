@@ -2,8 +2,10 @@ require('./connection');
 require('./Utils/tables')
 
 var jwt = require('jsonwebtoken');
-var mysql = require('mysql')
+var mysql = require('mysql');
+var validator = require('validator');
 var connectionpool = getConn();
+
 
 
 var secret = 'this is the secret secret secret 12356';
@@ -29,7 +31,7 @@ excQuery = function (query, cb) {
                 if (err) {
                     log('---------------------------');
                     log('Exc Error' + err);
-                    jsonlog("In error" , err);
+                    jsonlog("In error", err);
                     error = {
                         "status": "error",
                         "data": err,
@@ -110,7 +112,7 @@ isInt = function (n) {
     n = parseInt(n);
     return Number(n) === n && n % 1 === 0;
 }
-
+//valida si es INT o FLOAT
 isFloat = function (n) {
     n = parseFloat(n);
     log(n);
@@ -181,7 +183,7 @@ vlCreateDocument = function (body) {
     // "Status": "Status", NULL 
 }
 
- queryString = function (query, strQuery,CallBack) {
+queryString = function (query, strQuery, CallBack) {
     var limit = (strQuery.limit == undefined ? 20 : parseInt(strQuery.limit));
     var offset = (strQuery.offset == undefined ? 0 : parseInt(strQuery.offset));
     var sort = (strQuery.sort == undefined ? '-Id' : strQuery.sort);
@@ -196,7 +198,7 @@ vlCreateDocument = function (body) {
         // key: the name of the object key
         // index: the ordinal position of the key within the object
         like = like + key + ' LIKE "%?%" ';
-        likeInsert[index] = strQuery[key]; 
+        likeInsert[index] = strQuery[key];
         if (index != objItems.length - 1) {
             like = like + ' AND '
         }
@@ -204,39 +206,39 @@ vlCreateDocument = function (body) {
     if (like != ' AND (') {
         like = like + ' ) ORDER BY ? ';
     } else {
-       like = ' ORDER BY ? '
+        like = ' ORDER BY ? '
     }
-         likeInsert[likeInsert.length] = sort;
+    likeInsert[likeInsert.length] = sort;
 
-        like = mysql.format(like,likeInsert); 
-        like = like.replace(/\'/g,""); 
-        likeInsert = []; 
+    like = mysql.format(like, likeInsert);
+    like = like.replace(/\'/g, "");
+    likeInsert = [];
 
-        var strCount = "SELECT COUNT(*) AS TOTAL_ROWS FROM   ("+query + like + " ) as result "; 
+    var strCount = "SELECT COUNT(*) AS TOTAL_ROWS FROM   (" + query + like + " ) as result ";
 
-        query = "SELECT * FROM   ("+query + like + " ) as result   limit ? offset ?";
+    query = "SELECT * FROM   (" + query + like + " ) as result   limit ? offset ?";
 
 
     likeInsert[likeInsert.length] = limit;
     likeInsert[likeInsert.length] = offset;
 
     query = mysql.format(query, likeInsert);
-//Busca la cantidad de registros en la db. 
-var pag  = null; 
-log(strCount); 
+    //Busca la cantidad de registros en la db. 
+    var pag = null;
+    log(strCount);
     excQuery(strCount, function (errCount, responseCount) {
-			if (errCount) {
-				jsonlog("Err Getting Count: "+errCount);
-			} else {
-				jsonlog("responseCount", responseCount); 
-              pag =  pagin(responseCount.data[0].TOTAL_ROWS, limit, offset); 
-              CallBack(query, pag);
-			}
-		});
+        if (errCount) {
+            jsonlog("Err Getting Count: " + errCount);
+        } else {
+            jsonlog("responseCount", responseCount);
+            pag = pagin(responseCount.data[0].TOTAL_ROWS, limit, offset);
+            CallBack(query, pag);
+        }
+    });
 }
 
-pagin = function(total, limit, offset ){        
-    var pag =  {
+pagin = function (total, limit, offset) {
+    var pag = {
         "size": total,
         "offset": offset,
         "limit": limit,
@@ -245,46 +247,46 @@ pagin = function(total, limit, offset ){
             "limit": limit
         },
         "last": {
-            "offset":  (total <= limit ? 0 :  Math.ceil(total/limit) -1 ) ,
+            "offset": (total <= limit ? 0 : Math.ceil(total / limit) - 1),
             "limit": limit
         }
     }
-    return pag; 
+    return pag;
 }
 
-addPaginToResponse = function (response,pag){
-    response.size = pag.size;  
-    response.offset = pag.offset;  
-    response.limit = pag.limit;  
-    response.first = pag.first;  
-    response.last = pag.last;  
-return response; 
+addPaginToResponse = function (response, pag) {
+    response.size = pag.size;
+    response.offset = pag.offset;
+    response.limit = pag.limit;
+    response.first = pag.first;
+    response.last = pag.last;
+    return response;
 
 }
 
-tableStructrure = function(tablename, CallBack){
-var query = "SELECT DISTINCT "+
-" COLUMN_NAME AS name,"+
-" if(IS_NULLABLE= 'NO', 'true', 'false') as requiered,"+
-" case DATA_TYPE"+
-" when  'varchar' then 'string'"+
-" when  'datetime' then 'date'"+
-" else  'number' END "+
-" as type, "+
-" CHARACTER_MAXIMUM_LENGTH as max,"+
-" NULL AS min,"+
-" 'false' as editable   FROM "+
-" INFORMATION_SCHEMA.COLUMNS  WHERE"+
-" TABLE_NAME ='"+ tablename+"'"; 
-log(query); 
- excQuery(query, function (errCount, response) {
-			if (errCount) {
-				jsonlog("Structure: "+errCount);
-			} else {
-				jsonlog("Structure", response); 
-              CallBack(response);
-			}
-		});
+tableStructrure = function (tablename, CallBack) {
+    var query = "SELECT DISTINCT " +
+        " COLUMN_NAME AS name," +
+        " if(IS_NULLABLE= 'NO', 'true', 'false') as requiered," +
+        " case DATA_TYPE" +
+        " when  'varchar' then 'string'" +
+        " when  'datetime' then 'date'" +
+        " else  'number' END " +
+        " as type, " +
+        " CHARACTER_MAXIMUM_LENGTH as max," +
+        " NULL AS min," +
+        " 'false' as editable   FROM " +
+        " INFORMATION_SCHEMA.COLUMNS  WHERE" +
+        " TABLE_NAME ='" + tablename + "'";
+    log(query);
+    excQuery(query, function (errCount, response) {
+        if (errCount) {
+            jsonlog("Structure: " + errCount);
+        } else {
+            jsonlog("Structure", response);
+            CallBack(response);
+        }
+    });
 }
 
 newToken = function (Username, Id, CompanyId, date) {
@@ -302,10 +304,53 @@ newToken = function (Username, Id, CompanyId, date) {
 
 obj_structure = function (array_obj) {
 
-var obj={}; 
+    var obj = {};
     for (var x = 0; x < array_obj.length; x++) {
-        obj[ array_obj[x].name ] = null; 
+        obj[array_obj[x].name] = null;
     }
-jsonlog("obj...", obj)
-return obj; 
+    jsonlog("obj...", obj)
+    return obj;
+}
+
+
+validateRequest = function (array_obj, req, validateId) {
+jsonlog("array ",array_obj); 
+    var err = [];
+    //recorremos las propiedades del obj
+    for (var x = 0; x < array_obj.length; x++) {
+        //si el campo es requerido validamos que sea distinto de null y undefined
+        if (array_obj[x].requiered === true) {
+            if (validateId === true) {
+                //si es de tipo number validamos que lo sea.
+                switch (array_obj[x].type) {
+                    case "number":
+                        if (!isfloat(req[array_obj[x].name]))
+                            err.push("Param " + array_obj[x].name + "is not valid or is empty.");
+                    default:
+                        if (!isString(req[array_obj[x].name]))
+                            err.push("Param " + array_obj[x].name + "is not valid or is empty.");
+                }
+            } else {
+                if (array_obj[x].name != 'Id') {
+                    //si es de tipo number validamos que lo sea.
+                     // console.log(array_obj[x].name+" "+req[array_obj[x].name]+ " valicion pass "+ !isFloat(req[array_obj[x].name]))
+                      
+                    switch (array_obj[x].type) {
+                        case "number":
+                            if (!isFloat(req[array_obj[x].name])){
+                                err.push("Param " + array_obj[x].name + " is not a valid "+ array_obj[x].type)
+                            }
+                            break;
+                        default:
+                            if (!isString(req[array_obj[x].name])){
+                                err.push("Param " + array_obj[x].name + " is not a valid "+ array_obj[x].type);
+                            }
+                    }
+                }
+            }
+
+        }
+    }
+    jsonlog("Validaciones...", err)
+    return err;
 }
