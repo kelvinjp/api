@@ -1565,15 +1565,6 @@ obj_Products = {
                 "editable": false
             },
             {
-                "name": "CategoryId",
-                "requiered": true,
-                "type": "number",
-                "max": 2147483647,
-                "min": 0,
-                "show": true,
-                "editable": false
-            },
-            {
                 "name": "Created",
                 "requiered": false,
                 "type": "date",
