@@ -781,15 +781,6 @@ obj_Documents = {
                 "editable": false
             },
             {
-                "name": "TypeId",
-                "requiered": false,
-                "type": "number",
-                "max": 99,
-                "min": 0,
-                "show": true,
-                "editable": false
-            },
-            {
                 "name": "DocumentsId",
                 "requiered": false,
                 "type": "number",

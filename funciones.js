@@ -352,5 +352,10 @@ jsonlog("array ",array_obj);
         }
     }
     jsonlog("Validaciones...", err)
-    return err;
+    if(err.length === 0){
+        return {"status":'ok', "message":err};
+    }else{
+        return {"status":'fail', "message":err};
+    }
+    
 }

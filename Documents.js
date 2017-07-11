@@ -137,17 +137,16 @@ router.delete('/facturing/Documents/:Id', function (req, res) {
 router.post('/facturing/Documents', function (req, res) {
  
 	var ok = validateRequest(obj_Documents.forms.items, req.body, false);
-	if (ok.length === 0) {
+	if (ok.status === 'ok') {
 			token = req.headers.authorization.substring(7);
 		var decoded = jwt.verify(token, secret);
 		var validacion = vlCreateDocument(req.body);
-		if (validacion.status === 'success') {
+		
 			var document = {
 				"CompaniesId": decoded.CompanyId,
 				"CurrencyId": req.body.CurrencyId,
 				"CustomerId": req.body.CustomerId,
 				"StatusId": req.body.StatusId,
-				"TypeId": req.body.TypeId,
 				"Enabled": req.body.Enabled,
 				"DocumentsId": req.body.DocumentsId,
 				"Number": req.body.Number,
@@ -246,7 +245,7 @@ router.post('/facturing/Documents', function (req, res) {
 				});
 			}
 
-			if (document.TypeId === 4 && (document.Number === undefined || document.Number === null)) {
+			if (document.StatusId >= 10 && (document.Number === undefined || document.Number === null)) {
 				getNCF(function () {
 					CreateDocument(function () {
 						CreateDetails();
@@ -257,7 +256,6 @@ router.post('/facturing/Documents', function (req, res) {
 					CreateDetails();
 				});
 			}
-		} else res.json(validacion);
 	} else {
 		res.status(422).json(ok);
 	}
@@ -276,7 +274,6 @@ router.put('/facturing/Documents', function (req, res) {
 			"CurrencyId": req.body.CurrencyId,
 			"CustomerId": req.body.CustomerId,
 			"StatusId": req.body.StatusId,
-			"TypeId": req.body.TypeId,
 			"Enabled": req.body.Enabled,
 			"DocumentsId": req.body.DocumentsId,
 			"Number": req.body.Number,
