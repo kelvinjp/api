@@ -93,7 +93,7 @@ router.post('/facturing/Taxes', function(req, res) {
 		{
 			"CompaniesId": decoded.CompanyId,
 			"Name": req.body.Name,
-			"value": req.body.value,
+			"Value": req.body.Value,
 			"CretatedBy": decoded.Username,
 			"UpdateBy": decoded.Username
 		}; 
@@ -126,7 +126,7 @@ router.put('/facturing/Taxes', function(req, res) {
 			"CompaniesId": decoded.CompanyId,
 			"Name": req.body.Name,
 			"Enabled":req.body.Enabled,
-			"value": req.body.value,
+			"Value": req.body.Value,
 			"UpdateBy": decoded.Username
 		}; 
 	jsonlog("UPDATE: ",data);

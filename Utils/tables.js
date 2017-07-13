@@ -1775,7 +1775,7 @@ obj_Taxes = {
                 "editable": true
             },
             {
-                "name": "value",
+                "name": "Value",
                 "requiered": true,
                 "type": "number",
                 "max": 2147483647,
