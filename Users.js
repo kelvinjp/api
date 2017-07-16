@@ -84,6 +84,9 @@ router.delete('/facturing/Users/:Id', function(req, res) {
  * usuario agregar y le pasamos esa variable al INSERT
  **********************************************************************/
 router.post('/Users', function(req, res) {
+		var ok = validateRequest(obj_Users.forms.items, req.body, false);
+	if (ok.status === 'ok') {
+	
 	var email = req.body.email;
 	
 	if (email==='')
@@ -137,6 +140,7 @@ router.post('/Users', function(req, res) {
 			}
 		}
 	}); 
+	} else res.status(422).json(ok);
 });
 
 /***********************EDITAR USUARIO LISTO**************************
@@ -144,6 +148,9 @@ router.post('/Users', function(req, res) {
  * usuario EDITAR y le pasamos esa variable al UPDATE
  **********************************************************************/
 router.put('/facturing/Users', function(req, res) {
+		var ok = validateRequest(obj_Users.forms.items, req.body, true);
+	if (ok.status === 'ok') {
+	
 	var email = req.body.email;
 	
 	if (email==='')
@@ -171,6 +178,7 @@ router.put('/facturing/Users', function(req, res) {
 			res.json(response);
 		}
 	});
+	} else res.status(422).json(ok);
 });
 
 module.exports = router;

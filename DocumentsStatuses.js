@@ -82,11 +82,14 @@ router.delete('/facturing/DocumentsStatuses/:Id', function(req, res) {
  * Tipos de documentos agregar y le pasamos esa variable al INSERT
  **********************************************************************/
 router.post('/facturing/DocumentsStatuses', function(req, res) {
-		token = req.headers.authorization.substring(7); 
+	var ok = validateRequest(obj_DocumentsStatuses.forms.items, req.body, true);
+	if (ok.status === 'ok') {
+	
+	token = req.headers.authorization.substring(7); 
 	var decoded = jwt.verify(token, secret);
 
 	var data = 
-	{
+	{"Id":req.body.Id,
     "Name": req.body.Name,
     "CreatedBy": decoded.Username,
     "UpdatedBy": decoded.Username
@@ -104,6 +107,7 @@ router.post('/facturing/DocumentsStatuses', function(req, res) {
 			res.json(responseInsert);
 		}
 	});
+	} else res.status(422).json(ok);
 });
 
 /***********************EDITAR Tipos de documentos LISTO**************************
@@ -111,6 +115,8 @@ router.post('/facturing/DocumentsStatuses', function(req, res) {
  * Tipos de documentos EDITAR y le pasamos esa variable al UPDATE
  **********************************************************************/
 router.put('/facturing/DocumentsStatuses', function(req, res) {
+	var ok = validateRequest(obj_DocumentsStatuses.forms.items, req.body, true);
+	if (ok.status === 'ok') {
 		token = req.headers.authorization.substring(7); 
 	var decoded = jwt.verify(token, secret);
 
@@ -139,6 +145,7 @@ router.put('/facturing/DocumentsStatuses', function(req, res) {
 			res.json(response);
 		}
 	});
+	} else res.status(422).json(ok);
 });
 
 module.exports = router;

@@ -85,7 +85,10 @@ router.delete('/facturing/Customers/:Id', function(req, res) {
  * Cliente agregar y le pasamos esa variable al INSERT
  **********************************************************************/
 router.post('/facturing/Customers', function(req, res) {
-		token = req.headers.authorization.substring(7); 
+	var ok = validateRequest(obj_Customers.forms.items, req.body, false);
+	if (ok.status === 'ok') {
+		
+	token = req.headers.authorization.substring(7); 
 	var decoded = jwt.verify(token, secret);
 jsonlog ("Decode: ", decoded); 
 	var data = 
@@ -122,6 +125,8 @@ jsonlog ("Decode: ", decoded);
 			res.json(responseInsert);
 		}
 	});
+	
+	} else res.status(422).json(ok);
 });
 
 /***********************EDITAR Cliente LISTO**************************
@@ -129,7 +134,10 @@ jsonlog ("Decode: ", decoded);
  * Cliente EDITAR y le pasamos esa variable al UPDATE
  **********************************************************************/
 router.put('/facturing/Customers', function(req, res) {
-		token = req.headers.authorization.substring(7); 
+	var ok = validateRequest(obj_Customers.forms.items, req.body, true);
+	if (ok.status === 'ok') {
+	
+	token = req.headers.authorization.substring(7); 
 	var decoded = jwt.verify(token, secret);
 
 	var email = req.body.email;
@@ -168,6 +176,8 @@ router.put('/facturing/Customers', function(req, res) {
 			res.json(response);
 		}
 	});
+	
+	} else res.status(422).json(ok);
 });
 
 module.exports = router;

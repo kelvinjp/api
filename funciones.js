@@ -119,6 +119,10 @@ isFloat = function (n) {
     return Number(n) === n && (n % 1 !== 0 || n % 1 === 0);
 }
 
+isFloat2 = function (n) {
+    log(222222)
+}
+
 isString = function (n) {
     if ((typeof n === 'string' || n instanceof String) && n.length > 0)
         return true;
@@ -316,6 +320,14 @@ obj_structure = function (array_obj) {
 validateRequest = function (array_obj, req, validateId) {
 jsonlog("array ",array_obj); 
     var err = [];
+
+testFloat = function (n) {
+    n = parseFloat(n);
+    log(n);
+    return Number(n) === n && (n % 1 !== 0 || n % 1 === 0);
+}
+
+
     //recorremos las propiedades del obj
     for (var x = 0; x < array_obj.length; x++) {
         //si el campo es requerido validamos que sea distinto de null y undefined
@@ -323,21 +335,25 @@ jsonlog("array ",array_obj);
             if (validateId === true) {
                 //si es de tipo number validamos que lo sea.
                 switch (array_obj[x].type) {
-                    case "number":
-                        if (!isfloat(req[array_obj[x].name]))
-                            err.push("Param " + array_obj[x].name + "is not valid or is empty.");
+                    case "number": 
+                        if (!testFloat(req[array_obj[x].name])){
+                            jsonlog(req[array_obj[x].name] +" Type; ",array_obj[x].type +" "+ !testFloat(req[array_obj[x].name]))
+                            err.push("Param " + array_obj[x].name + " is not a valid "+ array_obj[x].type);}
+                            break;
                     default:
-                        if (!isString(req[array_obj[x].name]))
-                            err.push("Param " + array_obj[x].name + "is not valid or is empty.");
+                        if (!isString(req[array_obj[x].name])){
+                            jsonlog(req[array_obj[x].name] +" Type; ",array_obj[x].type  +" "+ !isString(req[array_obj[x].name]))
+                            err.push("Param " + array_obj[x].name + " is not a valid "+ array_obj[x].type);
+                        }
                 }
             } else {
-                if (array_obj[x].name != 'Id') {
+                if (array_obj[x].name != 'Id' && array_obj[x].name != 'Enabled') {
                     //si es de tipo number validamos que lo sea.
                      // console.log(array_obj[x].name+" "+req[array_obj[x].name]+ " valicion pass "+ !isFloat(req[array_obj[x].name]))
                       
                     switch (array_obj[x].type) {
                         case "number":
-                            if (!isFloat(req[array_obj[x].name])){
+                            if (!testFloat(req[array_obj[x].name])){
                                 err.push("Param " + array_obj[x].name + " is not a valid "+ array_obj[x].type)
                             }
                             break;

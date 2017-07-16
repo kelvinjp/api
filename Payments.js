@@ -96,7 +96,9 @@ router.delete('/facturing/Payments/:Id', function (req, res) {
  * Payment agregar y le pasamos esa variable al INSERT
  **********************************************************************/
 router.post('/facturing/Payments', function (req, res) {
-	token = req.headers.authorization.substring(7);
+		var ok = validateRequest(obj_Payments.forms.items, req.body, false);
+	if (ok.status === 'ok') {
+token = req.headers.authorization.substring(7);
 	var decoded = jwt.verify(token, secret);
 	jsonlog("Decode: ", decoded);
 	var data =
@@ -125,6 +127,7 @@ router.post('/facturing/Payments', function (req, res) {
 			res.json(responseInsert);
 		}
 	});
+	} else res.status(422).json(ok);
 });
 
 /***********************EDITAR Payment LISTO**************************
@@ -132,6 +135,9 @@ router.post('/facturing/Payments', function (req, res) {
  * Payment EDITAR y le pasamos esa variable al UPDATE
  **********************************************************************/
 router.put('/facturing/Payments', function (req, res) {
+	var ok = validateRequest(obj_Payments.forms.items, req.body, true);
+	if (ok.status === 'ok') {
+
 	token = req.headers.authorization.substring(7);
 	var decoded = jwt.verify(token, secret);
 
@@ -163,6 +169,7 @@ router.put('/facturing/Payments', function (req, res) {
 			res.json(response);
 		}
 	});
+	} else res.status(422).json(ok);
 });
 
 module.exports = router;

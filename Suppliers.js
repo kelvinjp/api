@@ -87,6 +87,8 @@ router.delete('/facturing/Suppliers/:Id', function(req, res) {
  * l tipo de suplidor agregar y le pasamos esa variable al INSERT
  **********************************************************************/
 router.post('/facturing/Suppliers', function(req, res) {
+	var ok = validateRequest(obj_Suppliers.forms.items, req.body, false);
+	if (ok.status === 'ok') {
 	token = req.headers.authorization.substring(7); 
 	var decoded = jwt.verify(token, secret);
 	log(decoded); 
@@ -115,6 +117,7 @@ router.post('/facturing/Suppliers', function(req, res) {
 			res.json(response);
 		}
 	});	
+	} else res.status(422).json(ok);
 });
 
 /***********************EDITA tipo de suplidor**************************
@@ -122,7 +125,9 @@ router.post('/facturing/Suppliers', function(req, res) {
   tipo de suplidor EDITAR y le pasamos esa variable al UPDATE
  **********************************************************************/
 router.put('/facturing/Suppliers', function(req, res) {
-	token = req.headers.authorization.substring(7); 
+	var ok = validateRequest(obj_Suppliers.forms.items, req.body, true);
+	if (ok.status === 'ok') {
+		token = req.headers.authorization.substring(7); 
 	var decoded = jwt.verify(token, secret);
 	log(decoded); 
 
@@ -150,6 +155,7 @@ router.put('/facturing/Suppliers', function(req, res) {
 			res.json(response);
 		}
 	});
+	} else res.status(422).json(ok);
 });
 
 module.exports = router;

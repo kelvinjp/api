@@ -140,7 +140,6 @@ router.post('/facturing/Documents', function (req, res) {
 	if (ok.status === 'ok') {
 			token = req.headers.authorization.substring(7);
 		var decoded = jwt.verify(token, secret);
-		var validacion = vlCreateDocument(req.body);
 		
 			var document = {
 				"CompaniesId": decoded.CompanyId,
@@ -268,8 +267,8 @@ router.post('/facturing/Documents', function (req, res) {
 router.put('/facturing/Documents', function (req, res) {
 	token = req.headers.authorization.substring(7);
 	var decoded = jwt.verify(token, secret);
-	var validacion = vlCreateDocument(req.body);
-	if (validacion.status === 'success') {
+	var ok = validateRequest(obj_Documents.forms.items, req.body, true);
+	if (ok.status === 'ok') {
 		var document = {
 			"CurrencyId": req.body.CurrencyId,
 			"CustomerId": req.body.CustomerId,
@@ -405,7 +404,7 @@ router.put('/facturing/Documents', function (req, res) {
 				})
 			});
 		}
-	} else res.json(validacion);
+	} else res.status(422).json(ok);
 });
 
 module.exports = router;

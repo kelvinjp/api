@@ -88,6 +88,8 @@ router.delete('/facturing/Products/:Id', function(req, res) {
  * Producto agregar y le pasamos esa variable al INSERT
  **********************************************************************/
 router.post('/facturing/Products', function(req, res) {
+	var ok = validateRequest(obj_Products.forms.items, req.body, false);
+	if (ok.status === 'ok') {
 		token = req.headers.authorization.substring(7); 
 	var decoded = jwt.verify(token, secret);
 
@@ -120,6 +122,7 @@ router.post('/facturing/Products', function(req, res) {
 			res.json(responseInsert);
 		}
 	});
+	} else res.status(422).json(ok);
 });
 
 /***********************EDITAR Producto LISTO**************************
@@ -127,6 +130,8 @@ router.post('/facturing/Products', function(req, res) {
  * Producto EDITAR y le pasamos esa variable al UPDATE
  **********************************************************************/
 router.put('/facturing/Products', function(req, res) {
+	var ok = validateRequest(obj_Products.forms.items, req.body, true);
+	if (ok.status === 'ok') {
 		token = req.headers.authorization.substring(7); 
 	var decoded = jwt.verify(token, secret);
 
@@ -162,6 +167,7 @@ router.put('/facturing/Products', function(req, res) {
 			res.json(response);
 		}
 	});
+	} else res.status(422).json(ok);
 });
 
 module.exports = router;

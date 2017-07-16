@@ -87,6 +87,8 @@ router.delete('/facturing/Expenses/:Id', function(req, res) {
  * l gasto agregar y le pasamos esa variable al INSERT
  **********************************************************************/
 router.post('/facturing/Expenses', function(req, res) {
+	var ok = validateRequest(obj_Expenses.forms.items, req.body, false);
+	if (ok.status === 'ok') {
 	token = req.headers.authorization.substring(7); 
 	var decoded = jwt.verify(token, secret);
 	log(decoded); 
@@ -116,6 +118,7 @@ router.post('/facturing/Expenses', function(req, res) {
 			res.json(response);
 		}
 	});	
+	} else res.status(422).json(ok);
 });
 
 /***********************EDITA gasto**************************
@@ -123,6 +126,9 @@ router.post('/facturing/Expenses', function(req, res) {
   gasto EDITAR y le pasamos esa variable al UPDATE
  **********************************************************************/
 router.put('/facturing/Expenses', function(req, res) {
+	var ok = validateRequest(obj_Expenses.forms.items, req.body, true);
+	if (ok.status === 'ok') {
+	
 	token = req.headers.authorization.substring(7); 
 	var decoded = jwt.verify(token, secret);
 	log(decoded); 
@@ -153,6 +159,7 @@ router.put('/facturing/Expenses', function(req, res) {
 			res.json(response);
 		}
 	});
+	} else res.status(422).json(ok);
 });
 
 module.exports = router;

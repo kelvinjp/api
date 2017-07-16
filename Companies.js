@@ -8,9 +8,6 @@ var moment = require('moment');
 var expressJwt = require('express-jwt');
 var jwt = require('jsonwebtoken');
 var secret = 'this is the secret secret secret 12356';
-
-
-
 /**
  * Retorna una lista de todas comanias registradas
  *
@@ -76,6 +73,9 @@ router.delete('/facturing/Companies/:Id', function (req, res) {
  * la compania agregar y le pasamos esa variable al INSERT
  **********************************************************************/
 router.post('/facturing/Companies', function (req, res) {
+	var ok = validateRequest(obj_Companies.forms.items, req.body, false);
+	if (ok.status === 'ok') {
+	
 	token = req.headers.authorization.substring(7);
 	var decoded = jwt.verify(token, secret);
 	log(decoded);
@@ -128,6 +128,8 @@ router.post('/facturing/Companies', function (req, res) {
 
 		}
 	});
+	
+	} else res.status(422).json(ok);
 });
 
 /***********************EDITAR COMPANIA**************************
@@ -135,6 +137,9 @@ router.post('/facturing/Companies', function (req, res) {
  * compania EDITAR y le pasamos esa variable al UPDATE
  **********************************************************************/
 router.put('/facturing/Companies', function (req, res) {
+var ok = validateRequest(obj_Companies.forms.items, req.body, true);
+	if (ok.status === 'ok') {
+	
 	token = req.headers.authorization.substring(7);
 	var decoded = jwt.verify(token, secret);
 	log(decoded);
@@ -172,6 +177,8 @@ router.put('/facturing/Companies', function (req, res) {
 			res.json(response);
 		}
 	});
+	
+	} else res.status(422).json(ok);
 });
 
 module.exports = router;

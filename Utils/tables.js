@@ -24,7 +24,7 @@ obj_Categories = {
         "items": [
             {
                 "name": "Id",
-                "requiered": true,
+                "requiered": false,
                 "type": "number",
                 "max": 2147483647,
                 "min": 0,
@@ -33,7 +33,7 @@ obj_Categories = {
             },
             {
                 "name": "Enabled",
-                "requiered": true,
+                "requiered": false,
                 "type": "number",
                 "max": 1,
                 "min": 0,
@@ -123,7 +123,7 @@ obj_Companies = {
             },
             {
                 "name": "Enabled",
-                "requiered": true,
+                "requiered": false,
                 "type": "number",
                 "max": 1,
                 "min": 1,
@@ -1246,7 +1246,7 @@ obj_Expenses = {
             },
             {
                 "name": "CreatedBy",
-                "requiered": true,
+                "requiered": false,
                 "type": "string",
                 "max": 100,
                 "min": null,
@@ -1405,15 +1405,6 @@ obj_Payments = {
                 "editable": false
             },
             {
-                "name": "DocumentId",
-                "requiered": true,
-                "type": "number",
-                "max": 2147483647,
-                "min": 0,
-                "show": true,
-                "editable": false
-            },
-            {
                 "name": "Created",
                 "requiered": false,
                 "type": "date",
@@ -1503,7 +1494,7 @@ obj_Products = {
             },
             {
                 "name": "UnitsId",
-                "requiered": false,
+                "requiered": true,
                 "type": "string",
                 "max": 10,
                 "min": 0,
@@ -1609,7 +1600,7 @@ obj_Suppliers = {
             },
             {
                 "name": "Name",
-                "requiered": false,
+                "requiered": true,
                 "type": "string",
                 "max": 45,
                 "min": 0,
@@ -1812,7 +1803,7 @@ obj_Taxes = {
             },
             {
                 "name": "LastUpdate",
-                "requiered": true,
+                "requiered": false,
                 "type": "date",
                 "max": 27,
                 "min": 10,
@@ -1836,7 +1827,7 @@ obj_Units = {
     "forms": {
         "items": [
             {
-                "name": "id",
+                "name": "Id",
                 "requiered": true,
                 "type": "string",
                 "max": 10,
@@ -1845,8 +1836,8 @@ obj_Units = {
                 "editable": true
             },
             {
-                "name": "name",
-                "requiered": false,
+                "name": "Name",
+                "requiered": true,
                 "type": "string",
                 "max": 45,
                 "min": null,
@@ -1864,7 +1855,7 @@ obj_Units = {
             },
             {
                 "name": "CreatedBy",
-                "requiered": true,
+                "requiered": false,
                 "type": "string",
                 "max": 100,
                 "min": null,
@@ -1917,7 +1908,7 @@ obj_Users = {
             {
                 "name": "TypeId",
                 "requiered": true,
-                "type": "string",
+                "type": "number",
                 "max": 45,
                 "min": 0,
                 "show": true,
@@ -1944,7 +1935,7 @@ obj_Users = {
             {
                 "name": "Password",
                 "requiered": true,
-                "type": "number",
+                "type": "string",
                 "max": 64,
                 "min": 8,
                 "show": true,

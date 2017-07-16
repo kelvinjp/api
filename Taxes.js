@@ -86,7 +86,10 @@ router.delete('/facturing/Taxes/:Id', function(req, res) {
  * Impuesto agregar y le pasamos esa variable al INSERT
  **********************************************************************/
 router.post('/facturing/Taxes', function(req, res) {
-		token = req.headers.authorization.substring(7); 
+		var ok = validateRequest(obj_Taxes.forms.items, req.body, false);
+	if (ok.status === 'ok') {
+	
+	token = req.headers.authorization.substring(7); 
 	var decoded = jwt.verify(token, secret);
 
 	var data = 
@@ -110,6 +113,7 @@ router.post('/facturing/Taxes', function(req, res) {
 			res.json(responseInsert);
 		}
 	});
+	} else res.status(422).json(ok);
 });
 
 /***********************EDITAR Impuesto LISTO**************************
@@ -117,6 +121,8 @@ router.post('/facturing/Taxes', function(req, res) {
  * Impuesto EDITAR y le pasamos esa variable al UPDATE
  **********************************************************************/
 router.put('/facturing/Taxes', function(req, res) {
+		var ok = validateRequest(obj_Taxes.forms.items, req.body, true);
+	if (ok.status === 'ok') {
 		token = req.headers.authorization.substring(7); 
 	var decoded = jwt.verify(token, secret);
 
@@ -143,6 +149,7 @@ router.put('/facturing/Taxes', function(req, res) {
 			res.json(response);
 		}
 	});
+	} else res.status(422).json(ok);
 });
 
 module.exports = router;

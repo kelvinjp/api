@@ -75,6 +75,9 @@ router.delete('/facturing/SuppliersTypes/:Id', function(req, res) {
  * l tipo de suplidor agregar y le pasamos esa variable al INSERT
  **********************************************************************/
 router.post('/facturing/SuppliersTypes', function(req, res) {
+		var ok = validateRequest(obj_SuppliersTypes.forms.items, req.body, false);
+	if (ok.status === 'ok') {
+	
 	token = req.headers.authorization.substring(7); 
 	var decoded = jwt.verify(token, secret);
 	log(decoded); 
@@ -83,6 +86,7 @@ router.post('/facturing/SuppliersTypes', function(req, res) {
 	var data = 
 			{
 			"Name": req.body.Name,
+			"CompaniesId":decoded.CompanyId,
 			"CreatedBy" : decoded.Username,
 			"LastUpdatedBy" : decoded.Username
 		};
@@ -99,6 +103,7 @@ router.post('/facturing/SuppliersTypes', function(req, res) {
 			res.json(response);
 		}
 	});	
+	} else res.status(422).json(ok);
 });
 
 /***********************EDITA tipo de suplidor**************************
@@ -106,6 +111,9 @@ router.post('/facturing/SuppliersTypes', function(req, res) {
   tipo de suplidor EDITAR y le pasamos esa variable al UPDATE
  **********************************************************************/
 router.put('/facturing/SuppliersTypes', function(req, res) {
+		var ok = validateRequest(obj_SuppliersTypes.forms.items, req.body, true);
+	if (ok.status === 'ok') {
+	
 	token = req.headers.authorization.substring(7); 
 	var decoded = jwt.verify(token, secret);
 	log(decoded); 
@@ -130,6 +138,7 @@ router.put('/facturing/SuppliersTypes', function(req, res) {
 			res.json(response);
 		}
 	});
+	} else res.status(422).json(ok);
 });
 
 module.exports = router;

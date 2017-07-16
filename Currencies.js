@@ -76,6 +76,9 @@ router.delete('/facturing/Currencies/:Id', function(req, res) {
  * la moneda agregar y le pasamos esa variable al INSERT
  **********************************************************************/
 router.post('/facturing/Currencies', function(req, res) {
+var ok = validateRequest(obj_Currencies.forms.items, req.body, false);
+	if (ok.status === 'ok') {
+	
 	token = req.headers.authorization.substring(7); 
 	var decoded = jwt.verify(token, secret);
 	log(decoded); 
@@ -104,6 +107,8 @@ router.post('/facturing/Currencies', function(req, res) {
 			res.json(response);
 		}
 	});	
+	
+	} else res.status(422).json(ok);
 });
 
 /***********************EDITAR moneda**************************
