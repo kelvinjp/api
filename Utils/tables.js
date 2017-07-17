@@ -1906,13 +1906,13 @@ obj_Users = {
                 "editable": false
             },
             {
-                "name": "TypeId",
-                "requiered": true,
-                "type": "number",
+                "name": "Type",
+                "requiered": false,
+                "type": "string",
                 "max": 45,
                 "min": 0,
-                "show": true,
-                "editable": true
+                "show": false,
+                "editable": false
             },
             {
                 "name": "Username",

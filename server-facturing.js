@@ -88,7 +88,7 @@ app.post('/login', function (req, res) {
 
 	var username = req.body.email;
 	var password = req.body.password;
-	var query = "SELECT Id, CompanyId, Username, FirstName, LastName, Enabled, Created, CreatedBy, LastUpdated, LastUpdatedBy, email"
+	var query = "SELECT Id,Type, CompanyId, Username, FirstName, LastName, Enabled, Created, CreatedBy, LastUpdated, LastUpdatedBy, email"
 		+ " FROM Users WHERE ( Username= ? OR email= ?) AND Password= ?";
 
 	//var sql = "SELECT * FROM ?? WHERE ?? = ?";

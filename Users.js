@@ -20,7 +20,7 @@ router.get('/facturing/Users', function(req, res) {
 	token = req.headers.authorization.substring(7); 
 	var decoded = jwt.verify(token, secret);
 	log(decoded); 
-	var query = "SELECT  Id, CompanyId, Username, FirstName, LastName, Enabled, Created, CreatedBy, LastUpdated, LastUpdatedBy, email"
+	var query = "SELECT  Id, Type, CompanyId, Username, FirstName, LastName, Enabled, Created, CreatedBy, LastUpdated, LastUpdatedBy, email"
 				+" FROM Users WHERE CompanyId =?"; 
 	var inserts = [decoded.CompanyId];
 		query = mysql.format(query, inserts);
@@ -44,7 +44,7 @@ router.get('/facturing/Users', function(req, res) {
  *
  **************************************************/
 router.get('/facturing/Users/:Id', function(req, res) {
-	var query = "SELECT Id, CompanyId, Username, FirstName, LastName, Enabled, Created, CreatedBy, LastUpdated, LastUpdatedBy, email FROM `Users`WHERE Id=?"; 
+	var query = "SELECT Id, Type, CompanyId, Username, FirstName, LastName, Enabled, Created, CreatedBy, LastUpdated, LastUpdatedBy, email FROM `Users`WHERE Id=?"; 
 	var inserts = [req.params.Id];
 		query = mysql.format(query, inserts);
 	excQuery(query,function(err,response){
@@ -94,7 +94,6 @@ router.post('/Users', function(req, res) {
 
 	var data = {
     "CompanyId":req.body.CompanyId,
-	"TypeId": req.body.TypeId,
     "Username":req.body.Username, 
     "Password":req.body.Password,
     "FirstName":req.body.FirstName, 
